@@ -5,6 +5,8 @@ import {routerMiddleware} from 'connected-react-router';
 import { persistStore, persistReducer } from 'redux-persist'
 import {composeWithDevTools} from 'redux-devtools-extension';
 import rootSaga from './Sagas';
+import storage from 'redux-persist/lib/storage'
+import createRootReducer from './Reducers';
 
 export const history = createBrowserHistory();
 
@@ -14,10 +16,18 @@ const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 });
 
-const middleware = [sagaMiddleware, routerMiddleware];
+const persistConfig = {
+  key: 'root',
+  storage
+}
+const middleware = [sagaMiddleware, routerMiddleware(history)];
+
+const persistedReducer = persistReducer(persistConfig, createRootReducer(history));
+
 
 export default () => {
-  let store = createStore(persistReducer, composeEnhancers(applyMiddleware(...middleware)));
+  let store = createStore(persistedReducer,
+    composeEnhancers(applyMiddleware(...middleware),));
 
   let persistor = persistStore(store);
 

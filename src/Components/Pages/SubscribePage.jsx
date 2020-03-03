@@ -1,9 +1,9 @@
 import React from 'react'
 
 const SubscribePage = ()=>{
-  return <div>
+  return <>
     Subscribe Page
-  </div>
+  </>
 }
 
 export default SubscribePage;
