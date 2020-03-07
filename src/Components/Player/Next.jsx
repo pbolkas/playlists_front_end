@@ -4,7 +4,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 const Next = ()=>{
   return<>
-  <Button fullWidth>
+  <Button fullWidth variant="contained" color="secondary" disableElevation>
     <SkipNextIcon/>
   </Button>
   </>

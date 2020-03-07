@@ -8,6 +8,7 @@ import Next from './Next';
 const Player = ()=>{
   const [playing,setPlaying] = useState(false);
   return<>
+  here display song info e.g. remaining time, title, volume etc
   <Grid container
   direction= "row"
   >

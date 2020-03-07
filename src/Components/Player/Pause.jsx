@@ -4,7 +4,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 
 const Pause = ( )=>{
   return<>
-  <Button fullWidth>
+  <Button fullWidth variant="contained" color="secondary" disableElevation>
     <PauseIcon/>
   </Button>
   </>
