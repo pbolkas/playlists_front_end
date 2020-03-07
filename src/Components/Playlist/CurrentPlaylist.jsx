@@ -14,7 +14,7 @@ const CurrentPlaylist = () =>{
       <Typography variant="h5">
         Current Playlist
       </Typography>
-      Here we display a list with all the songs that exist inside the list
+      Here we display a list with all the songs that exist inside a list
     </Paper>
   </>
 }
