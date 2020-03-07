@@ -9,7 +9,6 @@ import StartingPage from './Components/Pages/StartingPage';
 
 const Routes = () => {
   const userLoggedIn= true;
-  console.log(React.version);
   return (
     <ConnectedRouter history={history}>
       <Switch>

@@ -1,24 +1,40 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Header from '../Common/Header';
 import { Route } from 'react-router-dom';
 import PlaylistsPage from './PlaylistsPage';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, CssBaseline } from '@material-ui/core';
 
-const useStyles = theme => makeStyles({
+const styles = makeStyles(theme => ({
     root:{
-        display: 'flex'
+      display: 'flex',
     },
-})
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+      flexGrow: 1,
+      height: '100vh',
+      padding: theme.spacing(3),
+      overflow: 'auto',
+    },
+}))
 
-const StartingPage = ({match}) =>{
-    const classes = useStyles();
+const StartingPage = ({classes,match}) =>{
+    // const classes = useStyles();
 
-    return <>
-    <Header />
+    return <div className={classes.root}>
+      
+      <CssBaseline />
+      
+      <Header />
 
-    <main>  
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer}/>
         <Route exact path= {match.path} component={PlaylistsPage}/>
-    </main>
-    </>
+      </main>
+    </div>
 }
-export default StartingPage;
+StartingPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(StartingPage);
