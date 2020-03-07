@@ -9,10 +9,7 @@ const useStyles = makeStyles(theme=>({
     padding:theme.spacing(2),
   }
 }))
-// this is a sample to play music using js
-// const audio = new Audio("http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3");
-// audio.volume = 0.3;
-// audio.play();
+
 const PlaylistsPage = ()=>{
   
   const classes = useStyles();
