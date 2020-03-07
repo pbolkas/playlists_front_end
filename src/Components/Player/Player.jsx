@@ -4,11 +4,13 @@ import Play from './Play';
 import Pause from './Pause';
 import Previous from './Previous';
 import Next from './Next';
+import SongInfo from './SongInfo';
 
 const Player = ()=>{
   const [playing,setPlaying] = useState(false);
   return<>
   here display song info e.g. remaining time, title, volume etc
+  <SongInfo/>
   <Grid container
   direction= "row"
   >
