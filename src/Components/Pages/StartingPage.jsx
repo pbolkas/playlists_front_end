@@ -10,12 +10,8 @@ const styles = makeStyles(theme => ({
     root:{
       display: 'flex',
     },
-    appBarSpacer: theme.mixins.toolbar,
     content: {
-      flexGrow: 1,
       height: '100vh',
-      padding: theme.spacing(3),
-      overflow: 'auto',
     },
 }))
 
