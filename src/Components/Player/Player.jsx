@@ -5,25 +5,32 @@ import Pause from './Pause';
 import Previous from './Previous';
 import Next from './Next';
 import SongInfo from './SongInfo';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {playerIsPlayingSelector } from '../../Selectors/playerSelector';
+import { setDurationAction, pauseAction } from '../../Actions';
 
 const Player = ()=>{
-  const [audio] = useState(new Audio("http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"));
+  const dispatch = useDispatch();
+  const [audio] = useState(new Audio("https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"));
+  dispatch(setDurationAction(audio.duration));
   
   const songIsPlaying = useSelector(playerIsPlayingSelector);
 
   useEffect(() => {
+    
     if(songIsPlaying){
       audio.play();
     }
     else{
       audio.pause();
     }
+
+    console.log(`elapsed time -> ${audio.currentTime} out of ${audio.duration}`)
+
     return () => {
       audio.pause();
     };
-  }, [songIsPlaying,audio])
+  }, [songIsPlaying,audio,dispatch])
 
   return<>
   here display song info e.g. remaining time, title, volume etc
