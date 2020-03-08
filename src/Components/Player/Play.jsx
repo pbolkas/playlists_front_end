@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '@material-ui/core'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import { useDispatch } from 'react-redux';
+import {playAction,pauseAction} from '../../Actions'
 const Play = ()=>{
   
-  const audio = new Audio("http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3");
-  
+  const dispatch = useDispatch();
+
   const play=()=>{
-    
-    // this is a sample to play music using js
-    audio.volume = 1;
-    audio.play(); 
-    
+    dispatch(playAction());
+        
   }
   return <>
   <Button fullWidth variant="contained" color="secondary" disableElevation onClick={play}>
