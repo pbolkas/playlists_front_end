@@ -1,0 +1,14 @@
+export const PLAYLIST_ACTIONS={
+  SELECT_SONG : 'SELECT_SONG',
+  ALL_SONGS_REQUEST : 'ALL_SONGS_REQUEST',
+  ALL_SONGS_RESOLVE : 'ALL_SONGS_RESOLVE',
+  ALL_SONGS_REJECT: 'ALL_SONGS_RESOLVE',
+
+}
+
+export const setSelectedSong = (id)=>{
+  return {
+    type: PLAYLIST_ACTIONS.SELECT_SONG,
+    id
+  }
+}
