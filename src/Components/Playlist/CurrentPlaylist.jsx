@@ -1,6 +1,7 @@
 import React from 'react'
 import { Paper, makeStyles, Typography, Grid } from '@material-ui/core';
 import Player from '../Player/Player';
+import Playlist from './Playlist';
 
 const useStyles = makeStyles(theme=>({
   paper:{
@@ -18,7 +19,7 @@ const CurrentPlaylist = () =>{
       {/* In the grid below we have to grid items (for the list of the songs & for the player buttons (play,pause,next, previous etc)) */}
       <Grid container>
         <Grid item xs={12}>
-          Song list
+          <Playlist/>
         </Grid>
         <Grid item xs={12}>
           <Player/>

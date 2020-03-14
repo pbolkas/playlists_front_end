@@ -9,10 +9,7 @@ const useStyles = makeStyles(theme=>({
     padding:theme.spacing(2),
   }
 }))
-// this is a sample to play music using js
-// const audio = new Audio("http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3");
-// audio.volume = 0.3;
-// audio.play();
+
 const PlaylistsPage = ()=>{
   
   const classes = useStyles();
@@ -21,10 +18,10 @@ const PlaylistsPage = ()=>{
       Playlist App
     </Typography>
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <CurrentPlaylist/>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <Paper className={classes.paper}>
           Playlists list
         </Paper>
