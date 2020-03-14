@@ -13,10 +13,8 @@ import { selectedSongSelector } from '../../Selectors/playlistSelector';
 const Player = ()=>{
   const dispatch = useDispatch();
   const selectedSong = useSelector(selectedSongSelector);
-  
   const audio = new Audio (selectedSong === null ? "" : selectedSong.url);
   dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
-  
   const songIsPlaying = useSelector(playerIsPlayingSelector);
   
   useEffect(() => {

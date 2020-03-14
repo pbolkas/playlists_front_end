@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, makeStyles } from '@material-ui/core'
 const useStyles = makeStyles(theme=>({
   root:{
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(2),
   }
 }))
  const AddNewSong = ()=>{
