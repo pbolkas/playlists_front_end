@@ -1,6 +1,6 @@
 import {PLAYLIST_ACTIONS} from '../Actions'
-
-const initialPlayerState = {
+import _ from 'lodash';
+const initialPlaylistState = {
   songs:[
     {
       "id":1,
@@ -30,10 +30,15 @@ const initialPlayerState = {
   selectedSong:null
 }
 
-const playlistReducer = (state = initialPlayerState, action) =>{
+const playlistReducer = (state = initialPlaylistState, action) =>{
   switch (action.type) {
     case PLAYLIST_ACTIONS.SELECT_SONG:{
-      return state;
+      return {
+        ...state,
+        selectedSong: _.findLast(state.songs,(x)=>{
+          return x.id === action.id;
+        })
+      };
     }
     default:{
       return state;

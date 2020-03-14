@@ -8,7 +8,7 @@ import StartingPage from './Components/Pages/StartingPage';
 
 
 const Routes = () => {
-  const userLoggedIn= true;
+  // const userLoggedIn= true;
   return (
     <ConnectedRouter history={history}>
       <Switch>

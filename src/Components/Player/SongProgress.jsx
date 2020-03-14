@@ -20,6 +20,7 @@ const SongProgress = ()=>{
 
   const songDuration = useSelector(durationSelector);
   const songPlaying = useSelector(playerIsPlayingSelector);
+  
   useEffect(() => {
     function progress() {
       setCompleted(oldCompleted => {
@@ -40,7 +41,7 @@ const SongProgress = ()=>{
   }, [songDuration,songPlaying,dispatch]);
 
   return <>
-  <div className={classes.root}>
+    <div className={classes.root}>
       <LinearProgress variant="determinate" value={completed} />
     </div>
   </>

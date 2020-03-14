@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Grid } from '@material-ui/core'
 import Play from './Play';
 import Pause from './Pause';
@@ -7,15 +7,18 @@ import Next from './Next';
 import SongInfo from './SongInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import {playerIsPlayingSelector } from '../../Selectors/playerSelector';
-import { setDurationAction, pauseAction } from '../../Actions';
+import { setDurationAction } from '../../Actions';
+import { selectedSongSelector } from '../../Selectors/playlistSelector';
 
 const Player = ()=>{
   const dispatch = useDispatch();
-  const [audio] = useState(new Audio("https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"));
-  dispatch(setDurationAction(audio.duration));
+  const selectedSong = useSelector(selectedSongSelector);
+  
+  const audio = new Audio (selectedSong === null ? "" : selectedSong.url);
+  dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
   
   const songIsPlaying = useSelector(playerIsPlayingSelector);
-
+  
   useEffect(() => {
     
     if(songIsPlaying){
@@ -25,7 +28,7 @@ const Player = ()=>{
       audio.pause();
     }
 
-    console.log(`elapsed time -> ${audio.currentTime} out of ${audio.duration}`)
+    // console.log(`elapsed time -> ${audio.currentTime} out of ${audio.duration}`)
 
     return () => {
       audio.pause();
@@ -33,7 +36,6 @@ const Player = ()=>{
   }, [songIsPlaying,audio,dispatch])
 
   return<>
-  here display song info e.g. remaining time, title, volume etc
   <SongInfo/>
   <Grid container
   direction= "row"
