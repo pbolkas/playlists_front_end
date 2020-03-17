@@ -4,6 +4,9 @@ import Player from '../Player/Player';
 import Playlist from './Playlist';
 
 const useStyles = makeStyles(theme=>({
+  root:{
+    height:'100vh'
+  },
   paper:{
     padding: theme.spacing(2),
   }
@@ -11,7 +14,7 @@ const useStyles = makeStyles(theme=>({
 
 const CurrentPlaylist = () =>{
   const classes = useStyles();
-  return<>
+  return<div className={classes.root}>
     <Paper className={classes.paper}>
       <Typography variant="h5">
         Current Playlist
@@ -26,7 +29,7 @@ const CurrentPlaylist = () =>{
         </Grid>
       </Grid>
     </Paper>
-  </>
+  </div>
 }
 
 export default CurrentPlaylist;
