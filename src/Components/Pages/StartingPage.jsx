@@ -5,8 +5,7 @@ import Header from '../Common/Header';
 import { Route} from 'react-router-dom';
 import PlaylistsPage from './PlaylistsPage';
 import { makeStyles, CssBaseline } from '@material-ui/core';
-import LoginPage from './LoginPage';
-import SubscribePage from './SubscribePage';
+import EnterPage from './EnterPage';
 
 const styles = makeStyles(theme => ({
     root:{
@@ -19,7 +18,6 @@ const styles = makeStyles(theme => ({
 
 const StartingPage = ({classes,match}) =>{
     // const classes = useStyles();
-
     return <div className={classes.root}>
       
       <CssBaseline />
@@ -29,8 +27,7 @@ const StartingPage = ({classes,match}) =>{
       <main className={classes.content}>
         <div className={classes.appBarSpacer}/>
         
-        <Route exact path='/login' component={LoginPage}/>
-        <Route exact path='/register' component={SubscribePage}/>
+        <Route exact path='/login' component={EnterPage}/>
         <Route exact path= {match.path} component={PlaylistsPage}/>
       </main>
     </div>
