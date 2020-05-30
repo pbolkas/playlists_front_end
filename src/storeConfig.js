@@ -17,7 +17,7 @@ const composeEnhancers = composeWithDevTools({
 });
 
 const persistConfig = {
-  key: 'root',
+  key: 'rootPlaylists',
   storage
 }
 const middleware = [sagaMiddleware, routerMiddleware(history)];

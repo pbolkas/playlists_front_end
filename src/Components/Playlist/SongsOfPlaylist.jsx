@@ -8,7 +8,6 @@ import { songsSelector } from '../../Selectors/playlistSelector';
 const useStyles = makeStyles(theme=>({
   root:{
     overflowY: "scroll",
-    height: 200
   },
   backgroundLight:{
     backgroundColor: "#CDE7BE"

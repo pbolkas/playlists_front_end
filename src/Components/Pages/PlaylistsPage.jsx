@@ -1,6 +1,7 @@
 import React from 'react'
-import { makeStyles, Typography, Grid, Paper } from '@material-ui/core';
+import { makeStyles, Typography, Grid} from '@material-ui/core';
 import CurrentPlaylist from '../Playlist/CurrentPlaylist';
+import AvailablePlaylists from '../Playlist/AvailablePlaylists';
 const useStyles = makeStyles(theme=>({
   page:{
     padding:theme.spacing(2),
@@ -22,9 +23,7 @@ const PlaylistsPage = ()=>{
         <CurrentPlaylist/>
       </Grid>
       <Grid item xs={12} md={6}>
-        <Paper className={classes.paper}>
-          Playlists list
-        </Paper>
+        <AvailablePlaylists/>
       </Grid>
     </Grid>
   </div>
