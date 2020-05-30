@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Header from '../Common/Header';
-import { Route } from 'react-router-dom';
+import { Route} from 'react-router-dom';
 import PlaylistsPage from './PlaylistsPage';
 import { makeStyles, CssBaseline } from '@material-ui/core';
+import LoginPage from './LoginPage';
+import SubscribePage from './SubscribePage';
 
 const styles = makeStyles(theme => ({
     root:{
@@ -26,6 +28,9 @@ const StartingPage = ({classes,match}) =>{
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer}/>
+        
+        <Route exact path='/login' component={LoginPage}/>
+        <Route exact path='/register' component={SubscribePage}/>
         <Route exact path= {match.path} component={PlaylistsPage}/>
       </main>
     </div>

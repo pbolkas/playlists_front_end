@@ -17,7 +17,6 @@ const theme = createMuiTheme({
       main : "#CDE7BE"
     }    
   },
-  // spacing: factor => [0, 4, 8, 16, 32, 64][factor],
   typography:{
     useNextVariants: true,
     fontFamily:[

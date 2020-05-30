@@ -31,7 +31,7 @@ const SongsOfPlaylist = ()=>{
       {playlist.map((x,idx) => {
         return (
           <ListItem key={x.id} button className={idx %2 ===0 ? classes.backgroundDark : classes.backgroundLight}>
-            <ListItemText primary={`${x.Title}`} onClick={()=>handleSongSelect(x.id)}/>
+            <ListItemText primary={`${x.title}`} onClick={()=>handleSongSelect(x.id)}/>
           </ListItem>
         )
       })}
