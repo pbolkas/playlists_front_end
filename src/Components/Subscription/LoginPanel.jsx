@@ -8,8 +8,12 @@ const useStyles = makeStyles(theme =>({
   paper:{
     padding: theme.spacing(2),
   },
-  
-
+  flex: {
+    display: 'flex'
+  },
+  loading: {
+    margin: "auto",
+  },
 }))
 
 const LoginPanel = () => {
@@ -49,7 +53,13 @@ const LoginPanel = () => {
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        {loginRequested? <CircularProgress /> : <Button type="submit" fullWidth variant="contained" onClick={submitLogin}>Login</Button>}
+        <div className= {classes.flex}>
+          {
+            loginRequested?
+            <CircularProgress className={classes.loading} />:
+            <Button type="submit" fullWidth variant="contained" onClick={submitLogin}>Login</Button>
+          }
+          </div>
       </Grid>
     </Grid>
     </form>
