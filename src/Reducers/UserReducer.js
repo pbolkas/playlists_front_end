@@ -11,7 +11,7 @@ const userReducer = (state = initialState, action)=> {
     case (USER_ACTIONS.USER_LOGIN_REQUESTED_ACTION):{
       return{
         ...state,
-        loginRequested: true,
+        // loginRequested: true,
       }
     }
     default:
