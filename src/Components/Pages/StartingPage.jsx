@@ -28,6 +28,7 @@ const StartingPage = ({classes,match}) =>{
         <div className={classes.appBarSpacer}/>
         
         <Route exact path='/login' component={EnterPage}/>
+        
         <Route exact path= {match.path} component={PlaylistsPage}/>
       </main>
     </div>

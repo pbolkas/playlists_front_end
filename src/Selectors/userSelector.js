@@ -1,0 +1,1 @@
+export const LoginRequestedSelector = state => state.user.loginRequested;
