@@ -1,23 +1,25 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Header from '../Common/Header';
-import { Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import PlaylistsPage from './PlaylistsPage';
 import { makeStyles, CssBaseline } from '@material-ui/core';
 import EnterPage from './EnterPage';
+import { useSelector } from 'react-redux';
+import { UserLoggedInSelector } from '../../Selectors/userSelector';
 
-const styles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
     root:{
-      display: 'flex',
+      // display: 'flex',
     },
     content: {
-      height: '100vh',
+      // height: '100vh',
     },
 }))
 
-const StartingPage = ({classes,match}) =>{
-    // const classes = useStyles();
+const StartingPage = ({match}) =>{
+    const classes = useStyles();
+    const userLoggedIn = useSelector(UserLoggedInSelector);
+    
     return <div className={classes.root}>
       
       <CssBaseline />
@@ -27,13 +29,15 @@ const StartingPage = ({classes,match}) =>{
       <main className={classes.content}>
         <div className={classes.appBarSpacer}/>
         
-        <Route exact path='/login' component={EnterPage}/>
-        
-        <Route exact path= {match.path} component={PlaylistsPage}/>
+        {/* <Route exact path='/login' component={EnterPage}/> */}
+        {/* <Route exact path='/app' component={PlaylistsPage} /> */}
+
+        <Route exact path="/">
+          {userLoggedIn? <PlaylistsPage/> : <EnterPage/> }
+        </Route>
+
       </main>
     </div>
 }
-StartingPage.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-export default withStyles(styles)(StartingPage);
+
+export default StartingPage;
