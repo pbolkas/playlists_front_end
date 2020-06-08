@@ -5,20 +5,18 @@ import PlaylistsPage from './PlaylistsPage';
 import { makeStyles, CssBaseline } from '@material-ui/core';
 import EnterPage from './EnterPage';
 import { useSelector } from 'react-redux';
-import { UserLoggedInSelector } from '../../Selectors/userSelector';
+import { userLoggedInSelector } from '../../Selectors/userSelector';
 
 const useStyles = makeStyles(theme => ({
     root:{
-      // display: 'flex',
     },
     content: {
-      // height: '100vh',
     },
 }))
 
 const StartingPage = ({match}) =>{
     const classes = useStyles();
-    const userLoggedIn = useSelector(UserLoggedInSelector);
+    const userLoggedIn = useSelector(userLoggedInSelector);
     
     return <div className={classes.root}>
       

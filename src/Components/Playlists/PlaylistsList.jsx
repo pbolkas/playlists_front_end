@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, CircularProgress, makeStyles } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux';
-import { playlistsSelector, playlistsLoadingSelector } from '../../Selectors/playlistSelector';
+import { playlistsSelector, playlistsLoadingSelector, playlistsErrorSelector } from '../../Selectors/playlistSelector';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getAllPlaylistsRequestAction } from '../../Actions';
@@ -16,11 +16,12 @@ const PlaylistsList = ()=>{
 
   const playlists = useSelector(playlistsSelector);
   const playlistsLoading = useSelector(playlistsLoadingSelector);
+  const playlistsError = useSelector(playlistsErrorSelector);
   
 
   useEffect(() => {
     dispatch(getAllPlaylistsRequestAction());
-  },[])
+  },[dispatch])
 
   if(playlistsLoading)
   {
@@ -29,10 +30,17 @@ const PlaylistsList = ()=>{
     </>
   }
 
-  if(playlists.length < 1 )
+  if(playlistsError !== null)
   {
     return <>
-    This list is empty
+      There has been an error
+    </>
+  }
+
+  if(playlists.length < 1 && playlistsError === null)
+  {
+    return <>
+      This list is empty
     </>
   }
 

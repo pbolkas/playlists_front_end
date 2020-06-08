@@ -1,3 +1,5 @@
-export const LoginRequestedSelector = state => state.user.isLoading;
+export const loginRequestedSelector = state => state.user.isLoading;
 
-export const UserLoggedInSelector = state => state.user.isLoggedIn;
+export const userLoggedInSelector = state => state.user.isLoggedIn;
+
+export const jwtTokenSelector = state => state.user.jwtToken;

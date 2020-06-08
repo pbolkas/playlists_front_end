@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core';
 import ExitButton from '../Header/ExitButton';
 import { useSelector } from 'react-redux';
-import { UserLoggedInSelector } from '../../Selectors/userSelector';
+import { userLoggedInSelector } from '../../Selectors/userSelector';
 const useStyles= makeStyles(theme=> ({
   grow:{
     flexGrow: 1,
@@ -18,7 +18,7 @@ const useStyles= makeStyles(theme=> ({
 
 const Header = () =>{
   const classes = useStyles();
-  const userIsLoggedIn = useSelector(UserLoggedInSelector);
+  const userIsLoggedIn = useSelector(userLoggedInSelector);
   
   return <div className={classes.grow}>
     <AppBar position='static'>
