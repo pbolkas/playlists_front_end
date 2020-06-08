@@ -1,6 +1,6 @@
 import {PLAYLIST_ACTIONS} from '../Actions'
 import _ from 'lodash';
-const initialPlaylistState = {
+const initialPlaylistStateDemo = {
   songs:[
     {
       id:1,
@@ -40,6 +40,13 @@ const initialPlaylistState = {
   selectedSong:null
 }
 
+const initialPlaylistState = {
+  songs:[],
+  playlists:[],
+  playlistsLoading: false,
+  selectedSong:null
+}
+
 const playlistReducer = (state = initialPlaylistState, action) =>{
   switch (action.type) {
     case PLAYLIST_ACTIONS.SELECT_SONG:{
@@ -49,6 +56,12 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
           return x.id === action.id;
         })
       };
+    }
+    case PLAYLIST_ACTIONS.PLAYLISTS_GET_REQUESTED_ACTION:{
+      return {
+        ...state,
+        playlistsLoading: true
+      }
     }
     default:{
       return state;
