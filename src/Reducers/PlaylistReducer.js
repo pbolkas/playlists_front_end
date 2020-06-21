@@ -45,6 +45,7 @@ const initialPlaylistState = {
   playlists: [],
   playlistsLoading: false,
   playlistError: null,
+  playlistAddError : null,
   selectedSong: null
 }
 
@@ -78,6 +79,31 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
         playlistsLoading : false,
         playlistError : action.error,
         playlists : []
+      }
+    }
+    case PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED : {
+      return {
+        ...state,
+        playlistAddError: null
+      }
+    }
+    case PLAYLIST_ACTIONS.ADD_PLAYLIST_RESOLVED : {
+      return {
+        ...state,
+        playlists : [...state.playlists, action.playlist],
+        playlistAddError: null
+      }
+    }
+    case PLAYLIST_ACTIONS.ADD_PAYLIST_REJECTED : {
+      return {
+        ...state,
+        playlistAddError : action.error
+      }
+    }
+    case PLAYLIST_ACTIONS.CLEAR_ADD_ERROR : {
+      return {
+        ...state,
+        playlistAddError : null
       }
     }
     default :{

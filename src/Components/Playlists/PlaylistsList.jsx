@@ -7,7 +7,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { getAllPlaylistsRequestAction } from '../../Actions';
 
 const useStyles = makeStyles(theme => ({
-  
+  root:{
+    overflowY: "scroll",
+    maxHeight: 300
+  },
 }))
 
 const PlaylistsList = ()=>{
@@ -45,7 +48,7 @@ const PlaylistsList = ()=>{
   }
 
   return <>
-  <List>
+  <List className = {classes.root}>
   {playlists.map((p,idx) =>{
     return (
       <ListItem key = {idx} button>

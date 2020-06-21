@@ -11,7 +11,8 @@ export const PLAYLIST_ACTIONS = {
   ALL_SONGS_REJECTED: 'ALL_SONGS_REJECTED',
   ADD_PLAYLIST_REUQESTED : 'ADD_PLAYLIST_REQUESTED',
   ADD_PLAYLIST_RESOLVED : 'ADD_PLAYLIST_RESOLVED' ,
-  ADD_PAYLIST_REJECTED : 'ADD_PLAYLIST_REJECTED'
+  ADD_PAYLIST_REJECTED : 'ADD_PLAYLIST_REJECTED',
+  CLEAR_ADD_ERROR : 'CLEAR_ADD_ERROR'
 }
 
 export const getAllPlaylistsRequestAction = () => {
@@ -39,6 +40,26 @@ export const addPlaylistRequestAction = (title) => {
     type: PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED,
     title
    }
+}
+
+export const haveAddErrorClearAction = () => {
+  return {
+    type: PLAYLIST_ACTIONS.CLEAR_ADD_ERROR
+  }
+}
+
+export const addPlaylistResolveAction = (playlist) => {
+  return {
+    type: PLAYLIST_ACTIONS.ADD_PLAYLIST_RESOLVED,
+    playlist
+  }
+}
+
+export const addPlaylistRejectAction = (error) => {
+  return {
+    type: PLAYLIST_ACTIONS.ADD_PAYLIST_REJECTED,
+    error
+  }
 }
 
 export const getPlaylistRequestAction = (playlistId, token) => {

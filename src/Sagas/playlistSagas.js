@@ -1,5 +1,5 @@
 import {takeLatest, put, select} from 'redux-saga/effects';
-import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction } from "../Actions/PlaylistActions";
+import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction, addPlaylistResolveAction, addPlaylistRejectAction } from "../Actions/PlaylistActions";
 import {getPlaylists as getAllPlaylists, addNewPlaylistService} from '../Services/playlistService';
 import { jwtTokenSelector } from '../Selectors/userSelector';
 
@@ -23,12 +23,11 @@ function * addPlaylist(action)
   try
   {
     const playlist = yield addNewPlaylistService(action.title, jwtToken);
-    console.log(playlist.data)
-    // yield put(addPlaylistResolvedAction(playlist))
+    yield put(addPlaylistResolveAction(playlist.data))
   }
   catch(e)
   {
-    // yield put(addPlaylistRejectedAction());
+    yield put(addPlaylistRejectAction("error while adding new playlist"));
   }
 }
 
