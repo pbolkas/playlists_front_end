@@ -12,6 +12,9 @@ export const PLAYLIST_ACTIONS = {
   ADD_PLAYLIST_REUQESTED : 'ADD_PLAYLIST_REQUESTED',
   ADD_PLAYLIST_RESOLVED : 'ADD_PLAYLIST_RESOLVED' ,
   ADD_PAYLIST_REJECTED : 'ADD_PLAYLIST_REJECTED',
+  EDIT_PLAYLIST_NAME_REQUESTED: 'EDIT_PLAYLIST_NAME_REQUESTED',
+  EDIT_PLAYLIST_NAME_RESOLVED : 'EDIT_PLAYLIST_NAME_RESOLVED',
+  EDIT_PLAYLIST_NAME_REJECTED : 'EDIT_PLAYLIST_NAME_REJECTED',
   CLEAR_ADD_ERROR : 'CLEAR_ADD_ERROR'
 }
 
@@ -69,6 +72,14 @@ export const getPlaylistRequestAction = (playlistId, token) => {
 export const setSelectedSong = (id)=>{
   return {
     type: PLAYLIST_ACTIONS.SELECT_SONG,
+    id
+  }
+}
+
+export const editPlaylistNameRequest = (newName, id) => {
+  return {
+    type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REQUESTED,
+    newName,
     id
   }
 }

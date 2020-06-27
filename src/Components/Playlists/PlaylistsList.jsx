@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, CircularProgress, makeStyles } from '@material-ui/core'
+import { List, ListItem, ListItemText, ListItemSecondaryAction, CircularProgress, makeStyles } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux';
 import { playlistsSelector, playlistsLoadingSelector, playlistsErrorSelector } from '../../Selectors/playlistSelector';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { getAllPlaylistsRequestAction } from '../../Actions';
+import PlaylistListActions from '../Playlist/PlaylistActions/PlaylistListActions';
 
 const useStyles = makeStyles(theme => ({
   root:{
@@ -54,12 +53,7 @@ const PlaylistsList = ()=>{
       <ListItem key = {idx} button>
         <ListItemText primary={`${p.title}`}/>
         <ListItemSecondaryAction>
-          <IconButton>
-            <EditIcon/>
-          </IconButton>
-          <IconButton>
-            <DeleteIcon/>
-          </IconButton>
+          <PlaylistListActions playlist = {p}/>          
         </ListItemSecondaryAction>
       </ListItem>
     );
