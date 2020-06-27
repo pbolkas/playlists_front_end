@@ -76,10 +76,24 @@ export const setSelectedSong = (id)=>{
   }
 }
 
-export const editPlaylistNameRequest = (newName, id) => {
+export const editPlaylistNameRequest = (newTitle, id) => {
   return {
     type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REQUESTED,
-    newName,
+    newTitle,
     id
+  }
+}
+
+export const editPlaylistNameRejected = (err) => {
+  return {
+    type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED,
+    err
+  }
+}
+
+export const editPlaylistNameResolved = (playlist) => {
+  return {
+    type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_RESOLVED,
+    playlist,
   }
 }

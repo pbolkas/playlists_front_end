@@ -1,6 +1,6 @@
 import {takeLatest, put, select} from 'redux-saga/effects';
-import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction, addPlaylistResolveAction, addPlaylistRejectAction } from "../Actions/PlaylistActions";
-import {getPlaylists as getAllPlaylists, addNewPlaylistService} from '../Services/playlistService';
+import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction, addPlaylistResolveAction, addPlaylistRejectAction, editPlaylistNameRejected, editPlaylistNameResolved } from "../Actions/PlaylistActions";
+import {getPlaylists as getAllPlaylists, addNewPlaylistService, editPlaylistTitleService} from '../Services/playlistService';
 import { jwtTokenSelector } from '../Selectors/userSelector';
 
 function* getPlaylists(action)
@@ -31,8 +31,23 @@ function * addPlaylist(action)
   }
 }
 
+function * editPlaylist(action)
+{
+  const jwtToken = yield select(jwtTokenSelector);
+  try
+  {
+    const playlist = yield editPlaylistTitleService(action.newTitle, action.id, jwtToken);
+    yield put(editPlaylistNameResolved(playlist.data));
+  }
+  catch(e)
+  {
+    yield put(editPlaylistNameRejected("error while editing the title"));
+  }
+}
+
 export function* playlistSagas()
 {
   yield takeLatest(PLAYLIST_ACTIONS.PLAYLISTS_GET_REQUESTED_ACTION, getPlaylists);
   yield takeLatest(PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED, addPlaylist);
+  yield takeLatest(PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REQUESTED, editPlaylist);
 }

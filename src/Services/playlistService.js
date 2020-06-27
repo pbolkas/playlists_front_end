@@ -29,3 +29,19 @@ export const addNewPlaylistService = (title, token) =>{
     }
   )
 }
+
+export const editPlaylistTitleService = (newTitle, id, token) => {
+  return axios.put(
+    `${HOST}/playlists`,
+    {
+      id,
+      newTitle
+    },
+    {
+      "headers":
+      {
+        "Authorization" : `Bearer ${token}`
+      }
+    }
+  )
+}

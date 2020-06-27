@@ -106,6 +106,21 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
         playlistAddError : null
       }
     }
+    case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_RESOLVED : {
+      return {
+        ...state,
+        playlists : state.playlists.map((playlist)=>{
+          playlist.title = playlist.id === action.playlist.songId ? action.playlist.newTitle : playlist.title;
+          return playlist;
+        }),
+      }
+    }
+    case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED : {
+      return {
+        ...state,
+        playlistAddError: action.err
+      }
+    }
     default :{
       return state;
     }

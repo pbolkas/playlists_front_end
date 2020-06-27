@@ -3,7 +3,9 @@ import { IconButton } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit';
 import AddPlaylistDialog from '../AddPlaylist/AddPlaylistDialog';
 import { useDispatch } from 'react-redux';
-import { editPlaylistNameRequest } from '../../../Actions/PlaylistActions';
+import { editPlaylistNameRequest, haveAddErrorClearAction } from '../../../Actions/PlaylistActions';
+import Alert from '../../Common/Alert';
+import { playlistAddErrorSelector } from '../../../Selectors/playlistSelector';
 
 const EditPlaylistButton = ({ title, id }) => {
   
@@ -15,14 +17,14 @@ const EditPlaylistButton = ({ title, id }) => {
   }
 
   const editPlaylistTitle = (newTitle) => {
-    // dispatch action to edit playlist title
     dispatch(editPlaylistNameRequest(newTitle, id));
+    setOpenEditPlaylistDialog(false);
   }
 
   const handleRejectEditPlaylist = () =>{
     setOpenEditPlaylistDialog(false);
   }
-
+  
   return <>
   <AddPlaylistDialog dialogTitle={"Edit playlist title"} open={openEditPlaylistDialog} onReject={handleRejectEditPlaylist} defaultTitle={title} onAccept = {editPlaylistTitle}/>
     <IconButton onClick={handleEditPlaylist}>
