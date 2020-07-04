@@ -100,7 +100,7 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
         playlistAlertContent : action.error
       }
     }
-    case PLAYLIST_ACTIONS.EDIT_PAYLIST_REJECTED : {
+    case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_REJECTED : {
       return {
         ...state,
         playlistAlertContent : action.error
@@ -124,7 +124,7 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
     case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED : {
       return {
         ...state,
-        playlistAlertContent : action.err
+        playlistAlertContent : action.error
       }
     }
     case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_RESOLVED :{

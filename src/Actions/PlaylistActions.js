@@ -88,10 +88,10 @@ export const editPlaylistNameRequestAction = (newTitle, id) => {
   }
 }
 
-export const editPlaylistNameRejectedAction = (err) => {
+export const editPlaylistNameRejectedAction = (error) => {
   return {
     type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED,
-    err
+    error
   }
 }
 
@@ -114,7 +114,7 @@ export const removePlaylistResolvedAction = (id) => ({
   id
 })
 
-export const removePlaylistRejectedAction = (err) => ({
+export const removePlaylistRejectedAction = (error) => ({
   type: PLAYLIST_ACTIONS.REMOVE_PLAYLIST_REJECTED,
-  err
+  error
 })
