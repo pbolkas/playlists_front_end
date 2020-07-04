@@ -46,6 +46,7 @@ const initialPlaylistState = {
   playlistsLoading: false,
   playlistError: null,
   playlistAddError : null,
+  playlistEditError: null,
   selectedSong: null
 }
 
@@ -103,7 +104,13 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
     case PLAYLIST_ACTIONS.CLEAR_ADD_ERROR : {
       return {
         ...state,
-        playlistAddError : null
+        playlistAddError : null,
+      }
+    }
+    case PLAYLIST_ACTIONS.CLEAR_EDIT_ERROR : {
+      return {
+        ...state,
+        playlistEditError : null,
       }
     }
     case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_RESOLVED : {
@@ -118,7 +125,7 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
     case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED : {
       return {
         ...state,
-        playlistAddError: action.err
+        playlistEditError: action.err
       }
     }
     default :{

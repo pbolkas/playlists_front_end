@@ -9,3 +9,5 @@ export const playlistsLoadingSelector = state => state.playlist.playlistsLoading
 export const playlistsErrorSelector = state => state.playlist.playlistError;
 
 export const playlistAddErrorSelector = state => state.playlist.playlistAddError;
+
+export const playlistEditErrorSelector = state => state.playlist.playlistEditError;

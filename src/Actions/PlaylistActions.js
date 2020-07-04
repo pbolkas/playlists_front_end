@@ -15,7 +15,8 @@ export const PLAYLIST_ACTIONS = {
   EDIT_PLAYLIST_NAME_REQUESTED: 'EDIT_PLAYLIST_NAME_REQUESTED',
   EDIT_PLAYLIST_NAME_RESOLVED : 'EDIT_PLAYLIST_NAME_RESOLVED',
   EDIT_PLAYLIST_NAME_REJECTED : 'EDIT_PLAYLIST_NAME_REJECTED',
-  CLEAR_ADD_ERROR : 'CLEAR_ADD_ERROR'
+  CLEAR_ADD_ERROR : 'CLEAR_ADD_ERROR',
+  CLEAR_EDIT_ERROR : 'CLEAR_EDIT_ERROR',
 }
 
 export const getAllPlaylistsRequestAction = () => {
@@ -48,6 +49,12 @@ export const addPlaylistRequestAction = (title) => {
 export const haveAddErrorClearAction = () => {
   return {
     type: PLAYLIST_ACTIONS.CLEAR_ADD_ERROR
+  }
+}
+
+export const haveEditErrorClearAction = () => {
+  return {
+    type: PLAYLIST_ACTIONS.CLEAR_EDIT_ERROR
   }
 }
 
