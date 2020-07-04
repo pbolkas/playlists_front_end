@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles, Typography, Grid} from '@material-ui/core';
 import CurrentPlaylist from '../Playlist/CurrentPlaylist';
 import AvailablePlaylists from '../Playlist/AvailablePlaylists';
+import Alert from '../Common/Alert';
 
 const useStyles = makeStyles(theme=>({
   page:{
@@ -27,6 +28,7 @@ const PlaylistsPage = ()=>{
         <AvailablePlaylists/>
       </Grid>
     </Grid>
+    <Alert />
   </div>
 }
 

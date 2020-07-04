@@ -45,3 +45,15 @@ export const editPlaylistTitleService = (newTitle, id, token) => {
     }
   )
 }
+
+export const removePlaylistService = (id, token) => {
+  return axios.delete(
+    `${HOST}/playlists/${id}`,
+    {
+      "headers":
+      {
+        "Authorization" : `Bearer ${token}`
+      }
+    }
+  )
+}

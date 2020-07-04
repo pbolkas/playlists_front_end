@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { useSelector, useDispatch } from 'react-redux';
+import { playlistAlertSelector } from '../../Selectors/playlistSelector';
+import { clearAlertErrorAction } from '../../Actions';
 
-const Alert = ({ open = false, message = "Alert", clearAlert = () =>{ } }) => {
+const Alert = ({ open = false, message = "Alert", clearAlert }) => {
 
-  // const [openSnackbar,setOpenSnackbar] = useState(open);
+  const dispatch = useDispatch();
+
+  const displayAlert = useSelector(playlistAlertSelector);
   
   const handleClose = () => {
-    clearAlert();
+    dispatch(clearAlertErrorAction())
   }
 
   return <>
     <Snackbar
-      open={open}
-      message={message}
+      open={displayAlert ? true : false}
+      message={displayAlert}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'left',

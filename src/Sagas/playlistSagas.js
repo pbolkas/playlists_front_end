@@ -1,6 +1,6 @@
 import {takeLatest, put, select} from 'redux-saga/effects';
-import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction, addPlaylistResolveAction, addPlaylistRejectAction, editPlaylistNameRejected, editPlaylistNameResolved } from "../Actions/PlaylistActions";
-import {getPlaylists as getAllPlaylists, addNewPlaylistService, editPlaylistTitleService} from '../Services/playlistService';
+import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction, addPlaylistResolveAction, addPlaylistRejectAction, editPlaylistNameResolvedACtion, editPlaylistNameRejectedAction, editPlaylistNameResolvedAction, removePlaylistResolvedAction, removePlaylistRejectedAction } from "../Actions/PlaylistActions";
+import {getPlaylists as getAllPlaylists, addNewPlaylistService, editPlaylistTitleService, removePlaylistService} from '../Services/playlistService';
 import { jwtTokenSelector } from '../Selectors/userSelector';
 
 function* getPlaylists(action)
@@ -37,11 +37,25 @@ function * editPlaylist(action)
   try
   {
     const playlist = yield editPlaylistTitleService(action.newTitle, action.id, jwtToken);
-    yield put(editPlaylistNameResolved(playlist.data));
+    yield put(editPlaylistNameResolvedAction(playlist.data));
   }
   catch(e)
   {
-    yield put(editPlaylistNameRejected("error while editing the title"));
+    yield put(editPlaylistNameRejectedAction("error while editing the title"));
+  }
+}
+
+function * removePlaylist(action)
+{
+  const jwtToken = yield select(jwtTokenSelector);
+  try
+  {
+    let result = yield removePlaylistService(action.id, jwtToken);
+    yield put(removePlaylistResolvedAction(result.data.playlistId));
+  }
+  catch(e)
+  {
+    yield put(removePlaylistRejectedAction("error while removing the playlist"));
   }
 }
 
@@ -50,4 +64,5 @@ export function* playlistSagas()
   yield takeLatest(PLAYLIST_ACTIONS.PLAYLISTS_GET_REQUESTED_ACTION, getPlaylists);
   yield takeLatest(PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED, addPlaylist);
   yield takeLatest(PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REQUESTED, editPlaylist);
+  yield takeLatest(PLAYLIST_ACTIONS.REMOVE_PLAYLIST_REQUESTED, removePlaylist);
 }

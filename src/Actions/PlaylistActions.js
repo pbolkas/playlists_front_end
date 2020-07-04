@@ -15,8 +15,11 @@ export const PLAYLIST_ACTIONS = {
   EDIT_PLAYLIST_NAME_REQUESTED: 'EDIT_PLAYLIST_NAME_REQUESTED',
   EDIT_PLAYLIST_NAME_RESOLVED : 'EDIT_PLAYLIST_NAME_RESOLVED',
   EDIT_PLAYLIST_NAME_REJECTED : 'EDIT_PLAYLIST_NAME_REJECTED',
-  CLEAR_ADD_ERROR : 'CLEAR_ADD_ERROR',
-  CLEAR_EDIT_ERROR : 'CLEAR_EDIT_ERROR',
+  REMOVE_PLAYLIST_REQUESTED : 'REMOVE_PLAYLIST_REQUESTED',
+  REMOVE_PLAYLIST_RESOLVED : 'REMOVE_PLAYLIST_RESOLVED',
+  REMOVE_PLAYLIST_REJECTED : 'REMOVE_PLAYLIST_REJECTED',
+  CLEAR_ALERT_ERROR : 'CLEAR_ALERT_ERROR',
+
 }
 
 export const getAllPlaylistsRequestAction = () => {
@@ -46,15 +49,9 @@ export const addPlaylistRequestAction = (title) => {
    }
 }
 
-export const haveAddErrorClearAction = () => {
+export const clearAlertErrorAction = () => {
   return {
-    type: PLAYLIST_ACTIONS.CLEAR_ADD_ERROR
-  }
-}
-
-export const haveEditErrorClearAction = () => {
-  return {
-    type: PLAYLIST_ACTIONS.CLEAR_EDIT_ERROR
+    type: PLAYLIST_ACTIONS.CLEAR_ALERT_ERROR
   }
 }
 
@@ -83,7 +80,7 @@ export const setSelectedSong = (id)=>{
   }
 }
 
-export const editPlaylistNameRequest = (newTitle, id) => {
+export const editPlaylistNameRequestAction = (newTitle, id) => {
   return {
     type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REQUESTED,
     newTitle,
@@ -91,16 +88,33 @@ export const editPlaylistNameRequest = (newTitle, id) => {
   }
 }
 
-export const editPlaylistNameRejected = (err) => {
+export const editPlaylistNameRejectedAction = (err) => {
   return {
     type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED,
     err
   }
 }
 
-export const editPlaylistNameResolved = (playlist) => {
+export const editPlaylistNameResolvedAction = (playlist) => {
   return {
     type: PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_RESOLVED,
     playlist,
   }
 }
+
+export const removePlaylistRequestedAction = (id) => {
+  return {
+    type: PLAYLIST_ACTIONS.REMOVE_PLAYLIST_REQUESTED,
+    id
+  }
+}
+
+export const removePlaylistResolvedAction = (id) => ({
+  type:PLAYLIST_ACTIONS.REMOVE_PLAYLIST_RESOLVED,
+  id
+})
+
+export const removePlaylistRejectedAction = (err) => ({
+  type: PLAYLIST_ACTIONS.REMOVE_PLAYLIST_REJECTED,
+  err
+})

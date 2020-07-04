@@ -11,3 +11,5 @@ export const playlistsErrorSelector = state => state.playlist.playlistError;
 export const playlistAddErrorSelector = state => state.playlist.playlistAddError;
 
 export const playlistEditErrorSelector = state => state.playlist.playlistEditError;
+
+export const playlistAlertSelector = state => state.playlist.playlistAlertContent;

@@ -45,9 +45,8 @@ const initialPlaylistState = {
   playlists: [],
   playlistsLoading: false,
   playlistError: null,
-  playlistAddError : null,
-  playlistEditError: null,
-  selectedSong: null
+  selectedSong: null,
+  playlistAlertContent: null,
 }
 
 const playlistReducer = (state = initialPlaylistState, action) =>{
@@ -85,32 +84,32 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
     case PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED : {
       return {
         ...state,
-        playlistAddError: null
+        playlistAlertContent: null
       }
     }
     case PLAYLIST_ACTIONS.ADD_PLAYLIST_RESOLVED : {
       return {
         ...state,
         playlists : [...state.playlists, action.playlist],
-        playlistAddError: null
+        playlistAlertContent: null
       }
     }
     case PLAYLIST_ACTIONS.ADD_PAYLIST_REJECTED : {
       return {
         ...state,
-        playlistAddError : action.error
+        playlistAlertContent : action.error
       }
     }
-    case PLAYLIST_ACTIONS.CLEAR_ADD_ERROR : {
+    case PLAYLIST_ACTIONS.EDIT_PAYLIST_REJECTED : {
       return {
         ...state,
-        playlistAddError : null,
+        playlistAlertContent : action.error
       }
     }
-    case PLAYLIST_ACTIONS.CLEAR_EDIT_ERROR : {
+    case PLAYLIST_ACTIONS.CLEAR_ALERT_ERROR : {
       return {
         ...state,
-        playlistEditError : null,
+        playlistAlertContent: null,
       }
     }
     case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_RESOLVED : {
@@ -125,7 +124,13 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
     case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED : {
       return {
         ...state,
-        playlistEditError: action.err
+        playlistAlertContent : action.err
+      }
+    }
+    case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_RESOLVED :{
+      return {
+        ...state,
+        playlists : state.playlists.filter( (item) => ( item.id !== action.id ) )
       }
     }
     default :{
