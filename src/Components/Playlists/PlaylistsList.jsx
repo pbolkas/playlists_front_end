@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, CircularProgress, makeStyles } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux';
 import { playlistsSelector, playlistsLoadingSelector, playlistsErrorSelector } from '../../Selectors/playlistSelector';
-import { getAllPlaylistsRequestAction } from '../../Actions';
+import { getAllPlaylistsRequestAction, loadSongsRequestedAction } from '../../Actions';
 import PlaylistListActions from '../Playlist/PlaylistActions/PlaylistListActions';
 
 const useStyles = makeStyles(theme => ({
@@ -46,12 +46,16 @@ const PlaylistsList = ()=>{
     </>
   }
 
+  const loadPlaylistSongs = (id) =>{
+    dispatch(loadSongsRequestedAction(id));
+  }
+
   return <>
   <List className = {classes.root}>
   {playlists.map((p,idx) =>{
     return (
-      <ListItem key = {idx} button>
-        <ListItemText primary={`${p.title}`}/>
+      <ListItem key = {idx} button onClick={()=>loadPlaylistSongs(p.id)}>
+        <ListItemText primary={`${p.title}`} />
         <ListItemSecondaryAction>
           <PlaylistListActions playlist = {p}/>          
         </ListItemSecondaryAction>

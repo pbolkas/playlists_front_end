@@ -46,18 +46,29 @@ const initialPlaylistState = {
   playlistsLoading: false,
   playlistError: null,
   selectedSong: null,
+  songIsLoading : false,
   playlistAlertContent: null,
 }
 
 const playlistReducer = (state = initialPlaylistState, action) =>{
   switch (action.type) {
-    case PLAYLIST_ACTIONS.SELECT_SONG :{
+    case PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION :{
       return {
         ...state,
-        selectedSong : _.findLast(state.songs,(x)=>{
-          return x.id === action.id;
-        })
+        songIsLoading: true
+        // selectedSong : _.findLast(state.songs,(x)=>{
+        //   return x.id === action.id;
+        // })
       };
+    }
+    case PLAYLIST_ACTIONS.SELECT_SONG_RESOLVED_ACTION : {
+      const audio = new Audio (action.url);
+      audio.play();
+      return {
+        ...state,
+        songIsLoading: false,
+        selectedSong: action.url,
+      }
     }
     case PLAYLIST_ACTIONS.PLAYLISTS_GET_REQUESTED_ACTION :{
       return {
@@ -131,6 +142,13 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
       return {
         ...state,
         playlists : state.playlists.filter( (item) => ( item.id !== action.id ) )
+      }
+    }
+    case PLAYLIST_ACTIONS.LOAD_SONGS_REQUESTED_ACTION : {
+      const selectedPlaylist = state.playlists.find((list)=>list.id === action.id);
+      return {
+        ...state,
+        songs : selectedPlaylist.songs,            
       }
     }
     default :{

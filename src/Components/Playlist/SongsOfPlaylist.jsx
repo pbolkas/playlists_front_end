@@ -26,12 +26,22 @@ const SongsOfPlaylist = ()=>{
     dispatch(setSelectedSong(id));
   }
 
+  if(!playlist)
+  {
+    return <>Select a playlist to load songs</>
+  }
+
+  if(playlist.length === 0)
+  {
+    return <>The list is empty, add some tracks</>
+  }
+
   return <>
     <List className={classes.root}>
-      {playlist.map((x,idx) => {
+      {playlist.map((x, idx) => {
         return (
-          <ListItem key={x.id} button className={idx %2 ===0 ? classes.backgroundDark : classes.backgroundLight}>
-            <ListItemText primary={`${x.title}`} onClick={()=>handleSongSelect(x.id)}/>
+          <ListItem key={x.songId} button className={idx %2 ===0 ? classes.backgroundDark : classes.backgroundLight}>
+            <ListItemText primary={`${x.songTitle}`} onClick={() => handleSongSelect(x.songId)}/>
           </ListItem>
         )
       })}

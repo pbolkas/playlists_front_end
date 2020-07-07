@@ -1,7 +1,6 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import { IconButton, makeStyles } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { playlistAlertSelector } from '../../Selectors/playlistSelector';
 import { clearAlertErrorAction } from '../../Actions';
