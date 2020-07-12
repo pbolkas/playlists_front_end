@@ -8,22 +8,24 @@ import SongInfo from './SongInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import {playerIsPlayingSelector } from '../../Selectors/playerSelector';
 import { setDurationAction } from '../../Actions';
-import { selectedSongSelector } from '../../Selectors/playlistSelector';
+import { selectedSongSelector, songIsLoadingSelector } from '../../Selectors/playlistSelector';
 
 const Player = ()=>{
   const dispatch = useDispatch();
   const selectedSong = useSelector(selectedSongSelector);
-  console.log(selectedSong);
+  const songIsLoading = useSelector(songIsLoadingSelector);
+
+  console.log(`selected song ${selectedSong}`);
+
   const audio = new Audio (selectedSong === null ? "" : selectedSong);
-  dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
+  // dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
   const songIsPlaying = useSelector(playerIsPlayingSelector);
   
   useEffect(() => {
     
     if(songIsPlaying){
       audio.play();
-    }
-    else{
+    }else{
       audio.pause();
     }
 

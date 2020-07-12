@@ -62,8 +62,7 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
       };
     }
     case PLAYLIST_ACTIONS.SELECT_SONG_RESOLVED_ACTION : {
-      const audio = new Audio (action.url);
-      audio.play();
+      console.log(`song_resolved ${action.url}`)
       return {
         ...state,
         songIsLoading: false,

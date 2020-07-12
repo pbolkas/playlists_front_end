@@ -10,13 +10,27 @@ function * select_song(action)
   try
   {
     const result = yield fetchSongService(action.id, jwtToken);
-    console.log(result);
-    // yield put(selectSongResolveAction());
+
+    const bytes = result.data.fileContents;
+    
+    var songBytes = new Buffer(bytes, 'base64').toString('ascii');
+
+    var blob = new Blob([songBytes], {type:'audio/mpga'});
+       
+    yield put(selectSongResolveAction("url"));
   }
   catch(e)
   {
     // yield put(removePlaylistRejectedAction("error while removing the playlist"));
   }
+}
+
+function downloadURI(uri, name) 
+{
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    link.click();
 }
 
 export function* songSagas()
