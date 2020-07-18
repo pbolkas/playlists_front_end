@@ -11,13 +11,17 @@ function * select_song(action)
   {
     const result = yield fetchSongService(action.id, jwtToken);
 
-    const bytes = result.data.fileContents;
+    const base64 = result.data.fileContents;
     
-    var songBytes = new Buffer(bytes, 'base64').toString('ascii');
+    var songBytes = base64ToArrayBuffer(base64);
 
     var blob = new Blob([songBytes], {type:'audio/mpga'});
-       
-    yield put(selectSongResolveAction("url"));
+    var url = window.URL.createObjectURL(blob)
+    // window.audio = new Audio();
+    // window.audio.src = url;
+    // window.audio.play();
+           
+    yield put(selectSongResolveAction(url));
   }
   catch(e)
   {
@@ -25,12 +29,17 @@ function * select_song(action)
   }
 }
 
-function downloadURI(uri, name) 
-{
-    var link = document.createElement("a");
-    link.download = name;
-    link.href = uri;
-    link.click();
+function base64ToArrayBuffer(base64) {
+
+  var binaryString = window.atob(base64);
+  var binaryLen = binaryString.length;
+  var bytes = new Uint8Array(binaryLen);
+  for (var i = 0; i < binaryLen; i++) {
+     var ascii = binaryString.charCodeAt(i);
+     bytes[i] = ascii;
+  }
+
+  return bytes;
 }
 
 export function* songSagas()
