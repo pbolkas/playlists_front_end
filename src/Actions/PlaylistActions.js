@@ -122,16 +122,22 @@ export const loadSongsRequestedAction = (id) => ({
   id
 })
 
-export const selectSongResolveAction = (url) => {
+export const selectSongResolveAction = (song) => {
   return {
     type: PLAYLIST_ACTIONS.SELECT_SONG_RESOLVED_ACTION,
-    url
+    song
   }
 }
+
+export const selectSongRejectedAction = (error) => ({
+  type: PLAYLIST_ACTIONS.SELECT_SONG_REJECTED_ACTION,
+  error
+})
   
-export const setSelectedSong = (id) => {
+export const setSelectedSong = (id, title) => {
   return {
     type: PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION,
-    id
+    id,
+    title
   }
 }

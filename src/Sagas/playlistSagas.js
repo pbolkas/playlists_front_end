@@ -1,5 +1,5 @@
 import {takeLatest, put, select} from 'redux-saga/effects';
-import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction, addPlaylistResolveAction, addPlaylistRejectAction, editPlaylistNameResolvedACtion, editPlaylistNameRejectedAction, editPlaylistNameResolvedAction, removePlaylistResolvedAction, removePlaylistRejectedAction } from "../Actions/PlaylistActions";
+import { PLAYLIST_ACTIONS, getAllPlaylistsRejectAction, getAllPlaylistsResolveAction, addPlaylistResolveAction, addPlaylistRejectAction, editPlaylistNameRejectedAction, editPlaylistNameResolvedAction, removePlaylistResolvedAction, removePlaylistRejectedAction } from "../Actions/PlaylistActions";
 import {getPlaylists as getAllPlaylists, addNewPlaylistService, editPlaylistTitleService, removePlaylistService} from '../Services/playlistService';
 import { jwtTokenSelector } from '../Selectors/userSelector';
 

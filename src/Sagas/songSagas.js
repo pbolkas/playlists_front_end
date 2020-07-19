@@ -1,5 +1,5 @@
 import { takeLatest, select, put } from "redux-saga/effects";
-import { PLAYLIST_ACTIONS, selectSongResolveAction } from "../Actions";
+import { PLAYLIST_ACTIONS, selectSongResolveAction, selectSongRejectedAction } from "../Actions";
 import { jwtTokenSelector } from "../Selectors/userSelector";
 import { fetchSongService } from "../Services/songService";
 
@@ -12,20 +12,17 @@ function * select_song(action)
     const result = yield fetchSongService(action.id, jwtToken);
 
     const base64 = result.data.fileContents;
-    
-    var songBytes = base64ToArrayBuffer(base64);
+    const songBytes = base64ToArrayBuffer(base64);
+    const blob = new Blob([songBytes], {type:'audio/mpga'});
+    const url = window.URL.createObjectURL(blob)
 
-    var blob = new Blob([songBytes], {type:'audio/mpga'});
-    var url = window.URL.createObjectURL(blob)
-    // window.audio = new Audio();
-    // window.audio.src = url;
-    // window.audio.play();
-           
-    yield put(selectSongResolveAction(url));
+    const song = {songTitle : action.title, link: url, id: action.id };
+
+    yield put(selectSongResolveAction(song));
   }
   catch(e)
   {
-    // yield put(removePlaylistRejectedAction("error while removing the playlist"));
+    yield put(selectSongRejectedAction("error while selecting song"));
   }
 }
 

@@ -22,8 +22,8 @@ const SongsOfPlaylist = ()=>{
   const dispatch = useDispatch();
   const playlist = useSelector(songsSelector)
 
-  const handleSongSelect = (id) =>{
-    dispatch(setSelectedSong(id));
+  const handleSongSelect = (id, title) =>{
+    dispatch(setSelectedSong(id, title));
   }
 
   if(!playlist)
@@ -40,12 +40,11 @@ const SongsOfPlaylist = ()=>{
     <List className={classes.root}>
       {playlist.map((x, idx) => {
         return (
-          <ListItem key={x.songId} button className={idx %2 ===0 ? classes.backgroundDark : classes.backgroundLight}>
-            <ListItemText primary={`${x.songTitle}`} onClick={() => handleSongSelect(x.songId)}/>
+          <ListItem key={x.songId}  onClick={() => handleSongSelect(x.songId, x.songTitle)} button className={idx %2 ===0 ? classes.backgroundDark : classes.backgroundLight}>
+            <ListItemText primary={`${x.songTitle}`}/>
           </ListItem>
         )
       })}
-      
     </List>
   </>
 }
