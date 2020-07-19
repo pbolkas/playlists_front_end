@@ -22,15 +22,17 @@ const SongInfo = ()=>{
   const selectedSong = useSelector(selectedSongSelector);
 
   const handleDelete =()=>{
-    console.log("deleting")
+    console.log(`deleting ${selectedSong.id}`)
   }
+
   const showSongDetails =()=>{
     return <div className={classes.root}>
-      <Chip label={"Title : "+selectedSong.Title} className = {classes.chipsSpacing}/>
-      <Chip label={"Duration : "+selectedSong.LengthInSeconds} className = {classes.chipsSpacing}/>
+      <Chip label={"Title : "+selectedSong.songTitle} className = {classes.chipsSpacing}/>
+      {/* <Chip label={"Duration : "+selectedSong.LengthInSeconds} className = {classes.chipsSpacing}/> */}
       <Chip label="Delete" onDelete={handleDelete} className = {classes.chipsSpacing}/>
     </div>
   }
+  
   return <>
   {!selectedSong && "You need to select a song first"}
   {selectedSong && showSongDetails()}

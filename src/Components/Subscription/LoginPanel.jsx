@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Paper, makeStyles, Typography, Grid, Button, FormControl, InputLabel, Input, FormHelperText, CircularProgress } from '@material-ui/core'
 import { UserLoginRequestAction } from '../../Actions/UserActions';
 import { useSelector, useDispatch } from 'react-redux';
-import { LoginRequestedSelector } from '../../Selectors/userSelector';
+import { loginRequestedSelector } from '../../Selectors/userSelector';
 
 const useStyles = makeStyles(theme =>({
   paper:{
@@ -23,7 +23,7 @@ const LoginPanel = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loginRequested = useSelector(LoginRequestedSelector);
+  const loginRequested = useSelector(loginRequestedSelector);
   
   const classes = useStyles();
 

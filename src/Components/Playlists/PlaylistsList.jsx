@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, CircularProgress, makeStyles } from '@material-ui/core'
+import { List, ListItem, ListItemText, ListItemSecondaryAction, CircularProgress, makeStyles } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux';
-import { playlistsSelector, playlistsLoadingSelector } from '../../Selectors/playlistSelector';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { getAllPlaylistsRequestAction } from '../../Actions';
+import { playlistsSelector, playlistsLoadingSelector, playlistsErrorSelector } from '../../Selectors/playlistSelector';
+import { getAllPlaylistsRequestAction, loadSongsRequestedAction } from '../../Actions';
+import PlaylistListActions from '../Playlist/PlaylistActions/PlaylistListActions';
 
 const useStyles = makeStyles(theme => ({
-  
+  root:{
+    overflowY: "scroll",
+    maxHeight: 300
+  },
 }))
 
 const PlaylistsList = ()=>{
@@ -16,11 +18,12 @@ const PlaylistsList = ()=>{
 
   const playlists = useSelector(playlistsSelector);
   const playlistsLoading = useSelector(playlistsLoadingSelector);
+  const playlistsError = useSelector(playlistsErrorSelector);
   
 
   useEffect(() => {
     dispatch(getAllPlaylistsRequestAction());
-  },[])
+  },[dispatch])
 
   if(playlistsLoading)
   {
@@ -29,26 +32,32 @@ const PlaylistsList = ()=>{
     </>
   }
 
-  if(playlists.length < 1 )
+  if(playlistsError !== null)
   {
     return <>
-    This list is empty
+      There has been an error
     </>
   }
 
+  if(playlists.length < 1 && playlistsError === null)
+  {
+    return <>
+      This list is empty
+    </>
+  }
+
+  const loadPlaylistSongs = (id) =>{
+    dispatch(loadSongsRequestedAction(id));
+  }
+
   return <>
-  <List>
+  <List className = {classes.root}>
   {playlists.map((p,idx) =>{
     return (
-      <ListItem key = {idx} button>
-        <ListItemText primary={`${p.title}`}/>
+      <ListItem key = {idx} button onClick={()=>loadPlaylistSongs(p.id)}>
+        <ListItemText primary={`${p.title}`} />
         <ListItemSecondaryAction>
-          <IconButton>
-            <EditIcon/>
-          </IconButton>
-          <IconButton>
-            <DeleteIcon/>
-          </IconButton>
+          <PlaylistListActions playlist = {p}/>          
         </ListItemSecondaryAction>
       </ListItem>
     );
