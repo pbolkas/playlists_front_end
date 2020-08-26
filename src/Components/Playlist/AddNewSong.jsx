@@ -1,19 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, makeStyles } from '@material-ui/core'
-const useStyles = makeStyles(theme=>({
-  root:{
+import AddSongDialog from './AddSong/AddSongDialog';
+
+const useStyles = makeStyles(theme => ({
+  root: {
     // marginTop: theme.spacing(2),
   }
 }))
- const AddNewSong = ()=>{
-   const classes = useStyles();
+const AddNewSong = () => {
+  const classes = useStyles();
 
-   const handleAddNewSong =()=>{
-     console.log("Add new song (open a dialog window)")
-   }
-   return <Button className={classes.root} fullWidth variant="contained" color="secondary" onClick={handleAddNewSong}>
-     Add new song
+  const [openForm, setOpenForm] = useState(false);
+
+  const handleAddNewSong = () => {
+    setOpenForm(!openForm);
+  }
+
+  const setCloseForm = () => {
+    setOpenForm(false);
+  }
+
+  const handleRejectAddSong = () => {
+
+    setOpenForm(false);
+  }
+
+  return <>
+    <Button className={classes.root} fullWidth variant="contained" color="secondary" onClick={handleAddNewSong}>
+      Add new song
    </Button>
- }
+    <AddSongDialog open={openForm} dialogTitle="Add new song" fnReject={handleRejectAddSong} />
+  </>
+}
 
- export default AddNewSong;
+export default AddNewSong;
