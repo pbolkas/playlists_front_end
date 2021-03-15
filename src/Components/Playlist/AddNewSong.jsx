@@ -28,7 +28,7 @@ const AddNewSong = () => {
   return <>
     <Button className={classes.root} fullWidth variant="contained" color="secondary" onClick={handleAddNewSong}>
       Add new song
-   </Button>
+    </Button>
     <AddSongDialog open={openForm} dialogTitle="Add new song" fnReject={handleRejectAddSong} />
   </>
 }
