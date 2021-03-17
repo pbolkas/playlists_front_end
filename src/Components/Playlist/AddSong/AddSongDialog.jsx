@@ -8,7 +8,7 @@ const AddSongDialog = ({open, dialogTitle, fnAccept = () => {}, fnReject = () =>
   let songBytes;
 
   const onAccept = (title) =>{
-    console.log(title)
+    
   }
 
 

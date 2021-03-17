@@ -13,3 +13,21 @@ export const fetchSongService = (id, token) => {
     }
   )
 }
+
+export const addSongService = (title, playlistId, bytes, token) => {
+  return axios.post(
+    `${HOST}/Song`,
+    {
+      "SongTitle" : title,
+      "PlaylistId" : playlistId,
+      "SongBytes" : bytes
+    },
+    {
+      "headers":
+      {
+        "Authorization" : `Bearer ${token}`,
+        "Content-Type" : `multipart/form-data`
+      }
+    }
+  )
+}
