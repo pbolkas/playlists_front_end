@@ -43,10 +43,10 @@ export const addSongService = (title, playlistId, bytes, token) => {
     `${HOST}/Song`,
     formData,
     {
-      "headers":
+      headers:
       {
         "Authorization" : `Bearer ${token}`,
-        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+        'Content-Type': `multipart/form-data`,
       }
     }
   )
