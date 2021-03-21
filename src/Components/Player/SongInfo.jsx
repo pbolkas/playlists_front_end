@@ -1,8 +1,9 @@
 import React from 'react'
 import SongProgress from './SongProgress';
 import { Chip, makeStyles } from '@material-ui/core';
-import { selectedSongSelector } from '../../Selectors/playlistSelector';
-import { useSelector } from 'react-redux';
+import { selectedPlaylistSelector, selectedSongSelector } from '../../Selectors/playlistSelector';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeSongRequestAction } from '../../Actions';
 
 
 const useStyles = makeStyles(theme=>({
@@ -20,15 +21,18 @@ const useStyles = makeStyles(theme=>({
 const SongInfo = ()=>{
   const classes = useStyles();
   const selectedSong = useSelector(selectedSongSelector);
+  const selectedPlaylist = useSelector(selectedPlaylistSelector);
+  const dispatch = useDispatch();
 
   const handleDelete =()=>{
-    console.log(`deleting ${selectedSong.id}`)
+    dispatch(removeSongRequestAction(selectedSong.id, selectedPlaylist));
   }
 
   const showSongDetails =()=>{
     return <div className={classes.root}>
       <Chip label={"Title : "+selectedSong.songTitle} className = {classes.chipsSpacing}/>
       {/* <Chip label={"Duration : "+selectedSong.LengthInSeconds} className = {classes.chipsSpacing}/> */}
+      {/* need to replace the following line with a new component called delete song */}
       <Chip label="Delete" onDelete={handleDelete} className = {classes.chipsSpacing}/>
     </div>
   }

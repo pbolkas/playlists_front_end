@@ -1,7 +1,7 @@
 import { takeLatest, select, put } from "redux-saga/effects";
-import { PLAYLIST_ACTIONS, selectSongResolveAction, selectSongRejectedAction } from "../Actions";
+import { PLAYLIST_ACTIONS, selectSongResolveAction, selectSongRejectedAction, SONG_ACTIONS, removeSongResolveAction } from "../Actions";
 import { jwtTokenSelector } from "../Selectors/userSelector";
-import { fetchSongService } from "../Services/songService";
+import { addSongService, fetchSongService, removeSongService } from "../Services/songService";
 
 
 function * select_song(action)
@@ -26,6 +26,35 @@ function * select_song(action)
   }
 }
 
+function * uploadSong(action)
+{
+  const jwtToken = yield select(jwtTokenSelector);
+  try 
+  {
+    
+    const result = yield addSongService(action.title, action.playlistId, action.bytes, jwtToken);
+    
+  }
+  catch (e)
+  {
+
+  }
+}
+
+function * removeSong(action) {
+  const jwtToken = yield select(jwtTokenSelector);
+  try 
+  {
+    const result = yield removeSongService( action.songId, action.playlistId, jwtToken);
+    yield put(removeSongResolveAction(action.songId));
+
+  }
+  catch (e)
+  {
+
+  }
+}
+
 function base64ToArrayBuffer(base64) {
 
   var binaryString = window.atob(base64);
@@ -42,5 +71,7 @@ function base64ToArrayBuffer(base64) {
 export function* songSagas()
 {
   yield takeLatest(PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION, select_song);
+  yield takeLatest(SONG_ACTIONS.SONG_ADD_REQUESTED_ACTION, uploadSong);
+  yield takeLatest(SONG_ACTIONS.SONG_REMOVE_REQUESTED_ACTION, removeSong);
   
 }

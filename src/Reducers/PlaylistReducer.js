@@ -1,4 +1,4 @@
-import {PLAYLIST_ACTIONS} from '../Actions'
+import {PLAYLIST_ACTIONS, SONG_ACTIONS} from '../Actions'
 
 const initialPlaylistState = {
   songs: [],
@@ -6,6 +6,7 @@ const initialPlaylistState = {
   playlistsLoading: false,
   playlistError: null,
   selectedSong: null,
+  selectedPlaylist: null,
   songIsLoading : false,
   playlistAlertContent: null,
 }
@@ -104,7 +105,14 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
       const selectedPlaylist = state.playlists.find((list)=>list.id === action.id);
       return {
         ...state,
-        songs : selectedPlaylist.songs,            
+        songs : selectedPlaylist.songs,
+        selectedPlaylist : action.id
+      }
+    }
+    case SONG_ACTIONS.SONG_REMOVE_RESOLVED_ACTION : {
+      return {
+        ...state,
+        songs: state.songs.filter( (item) => (item.songId !== action.songId) )
       }
     }
     default :{
