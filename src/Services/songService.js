@@ -26,7 +26,7 @@ export const removeSongService = (songId, playlistId, token) => {
       },
       headers:
       {
-        Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjpbIlVzZXIiLCJVc2VyIl0sInVzZXJuYW1lIjoiZm9vQmFyIiwidXVpZCI6IjhjNzkyZDQ3LTIwNDQtNGFkYS1iNTZjLTdmOWMyZGVkYjhhYSIsIm5iZiI6MTYxNjM1Mjg1NiwiZXhwIjoxNjE2Mzg1MjU2LCJpYXQiOjE2MTYzNTI4NTZ9.h-y_WpBeOBu4YtZNd5wrMiQ_3xT9MWGDG8jmY8A0vZE`
+        Authorization : `Bearer ${token}`
       }
     
     });
@@ -46,7 +46,7 @@ export const addSongService = (title, playlistId, bytes, token) => {
       headers:
       {
         "Authorization" : `Bearer ${token}`,
-        'Content-Type': `multipart/form-data`,
+        'Content-Type': `multipart/form-data`
       }
     }
   )

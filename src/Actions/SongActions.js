@@ -26,9 +26,12 @@ export const addSongRejectAction = (error) => {
   }
 }
 
-export const addSongResolveAction = () => {
+export const addSongResolveAction = (newSong) => {
+  
+  console.log(newSong);
   return {
     type: SONG_ACTIONS.SONG_ADD_RESOLVED_ACTION,
+    newSong
   }
 }
 

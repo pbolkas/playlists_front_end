@@ -115,6 +115,13 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
         songs: state.songs.filter( (item) => (item.songId !== action.songId) )
       }
     }
+    case SONG_ACTIONS.SONG_ADD_RESOLVED_ACTION : {
+      let new_song = { songId : action.newSong.songId, songTitle : action.newSong.songTitle}
+      return {
+        ...state,
+        songs: [...state.songs, new_song]
+      }
+    }
     default :{
       return state;
     }

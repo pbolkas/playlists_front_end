@@ -1,5 +1,5 @@
 import { takeLatest, select, put } from "redux-saga/effects";
-import { PLAYLIST_ACTIONS, selectSongResolveAction, selectSongRejectedAction, SONG_ACTIONS, removeSongResolveAction } from "../Actions";
+import { PLAYLIST_ACTIONS, selectSongResolveAction, selectSongRejectedAction, SONG_ACTIONS, removeSongResolveAction, addSongResolveAction } from "../Actions";
 import { jwtTokenSelector } from "../Selectors/userSelector";
 import { addSongService, fetchSongService, removeSongService } from "../Services/songService";
 
@@ -33,6 +33,8 @@ function * uploadSong(action)
   {
     
     const result = yield addSongService(action.title, action.playlistId, action.bytes, jwtToken);
+    let newSong = result.data;
+    yield put(addSongResolveAction(newSong))
     
   }
   catch (e)

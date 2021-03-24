@@ -12,19 +12,6 @@ const AddSongDialog = ({open, dialogTitle, fnAccept = () => {}, fnReject = () =>
   const [songBytes, setSongBytes] = useState();
 
   const onAccept = (title) =>{
-    
-    // convert file to base64
-    // convert base64 to bytearray
-    // convert bytearray to blob
-    // create file url
-    // send file url to upload
-    // 1) const base64 = result.data.fileContents;
-    // 2) const songBytes = base64ToArrayBuffer(base64);
-    // 3) const blob = new Blob([songBytes], {type:'audio/mpga'});
-    // 4) const url = window.URL.createObjectURL(blob)
-
-    
-
     dispatch(addSongRequestAction(title, "5d73866f-e6a8-4b8b-96f2-c61a2ecffe5e", songBytes));
   }
 
