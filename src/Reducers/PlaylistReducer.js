@@ -112,7 +112,8 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
     case SONG_ACTIONS.SONG_REMOVE_RESOLVED_ACTION : {
       return {
         ...state,
-        songs: state.songs.filter( (item) => (item.songId !== action.songId) )
+        songs: state.songs.filter( (item) => (item.songId !== action.songId) ),
+        selectedSong : null
       }
     }
     case SONG_ACTIONS.SONG_ADD_RESOLVED_ACTION : {

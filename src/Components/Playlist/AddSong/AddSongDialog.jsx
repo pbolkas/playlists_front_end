@@ -27,9 +27,9 @@ const AddSongDialog = ({open, dialogTitle, fnAccept = () => {}, fnReject = () =>
     reader.onloadend = (evt) => {
       if (evt.target.readyState === FileReader.DONE) {
 
-        const blob = new Blob([evt.target.result], {type: 'audio/mpga'});
+        // const blob = new Blob([evt.target.result], {type: 'audio/mp3'});
 
-        setSongBytes(blob);
+        setSongBytes(song);
         
       }
 

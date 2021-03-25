@@ -13,7 +13,7 @@ function * select_song(action)
 
     const base64 = result.data.fileContents;
     const songBytes = base64ToArrayBuffer(base64);
-    const blob = new Blob([result.data.fileContents], {type:'audio/mpga'});
+    const blob = new Blob([songBytes], {type:'audio/mp3'});
     const url = window.URL.createObjectURL(blob)
 
     const song = {songTitle : action.title, link: url, id: action.id };
