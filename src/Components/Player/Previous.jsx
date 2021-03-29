@@ -1,9 +1,18 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-const Previous = ()=>{
+import { useDispatch } from 'react-redux';
+
+const Previous = () =>{
+
+  const dispatch = useDispatch();
+
+  const selectPreviousSong = () =>{
+
+  }
+
   return <>
-  <Button fullWidth variant="contained" color="secondary" disableElevation>
+  <Button fullWidth onClick={selectPreviousSong} variant="contained" color="secondary" disableElevation>
     <SkipPreviousIcon/>
   </Button>
   </>

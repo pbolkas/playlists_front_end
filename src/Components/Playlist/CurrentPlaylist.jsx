@@ -17,7 +17,6 @@ const CurrentPlaylist = () =>{
       <Typography variant="h5">
         Current Playlist
       </Typography>
-      {/* In the grid below we have to grid items (for the list of the songs & for the player buttons (play,pause,next, previous etc)) */}
       <Grid container>
         <Grid item xs={12}>
           <Playlist/>

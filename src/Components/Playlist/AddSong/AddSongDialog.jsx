@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, TextField } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addSongRequestAction } from '../../../Actions/SongActions';
+import { selectedPlaylistSelector } from '../../../Selectors/playlistSelector';
 
 
 const AddSongDialog = ({open, dialogTitle, fnAccept = () => {}, fnReject = () => {} }) =>{
 
   const dispatch = useDispatch();
+  const selectedPlaylist = useSelector(selectedPlaylistSelector);
 
   const [title, setTitle] = useState("");
   const [songBytes, setSongBytes] = useState();
 
   const onAccept = (title) =>{
-    dispatch(addSongRequestAction(title, "5d73866f-e6a8-4b8b-96f2-c61a2ecffe5e", songBytes));
+    dispatch(addSongRequestAction(title, selectedPlaylist, songBytes));
+    fnReject();
   }
-
 
   const loadSong = (evt) =>{
     
@@ -27,16 +29,12 @@ const AddSongDialog = ({open, dialogTitle, fnAccept = () => {}, fnReject = () =>
     reader.onloadend = (evt) => {
       if (evt.target.readyState === FileReader.DONE) {
 
-        // const blob = new Blob([evt.target.result], {type: 'audio/mp3'});
-
         setSongBytes(song);
         
       }
-
     };
 
     reader.readAsBinaryString(song);
-   
   }
 
 
