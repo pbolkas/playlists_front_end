@@ -21,6 +21,10 @@ const playlistReducer = (state = initialPlaylistState, action) =>{
       };
     }
     case PLAYLIST_ACTIONS.SELECT_SONG_RESOLVED_ACTION : {
+
+      // when we select a song we instantly find its previous and its next song
+      const song_idx = state.songs.map((song) => {return song.songId; }).indexOf(action.song.id);
+
       return {
         ...state,
         songIsLoading: false,

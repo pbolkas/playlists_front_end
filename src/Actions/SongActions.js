@@ -83,3 +83,40 @@ export const removeSongResolveAction = (songId) => {
     songId
   }
 }
+
+export const selectNextRequestAction = () => {
+  // when we find the id we dispatch a SELECT_SONG_REQUESTED_ACTION
+  return {
+    type: SONG_ACTIONS.SELECT_NEXT_REQUESTED_ACTION,
+  }
+}
+
+export const selectNextResolveAction = () => {
+  return {
+    type: SONG_ACTIONS.SELECT_NEXT_RESOLVED_ACTION,
+  }
+}
+
+export const selectNextRejectAction = () => {
+  return {
+    type: SONG_ACTIONS.SELECT_NEXT_REJECTED_ACTION,
+  }
+}
+
+export const selectPreviousRequestAction = () => {
+  return {
+    type: SONG_ACTIONS.SELECT_PREVIOUS_REQUESTED_ACTION,
+  }
+}
+
+export const selectPreviousResolveAction = () => {
+  return {
+    type: SONG_ACTIONS.SELECT_PREVIOUS_RESOLVED_ACTION,
+  }
+}
+
+export const selectPreviousRejectAction = () => {
+  return {
+    type: SONG_ACTIONS.SELECT_PREVIOUS_REJECTED_ACTION,
+  }
+}
