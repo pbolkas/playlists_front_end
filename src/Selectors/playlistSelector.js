@@ -17,3 +17,7 @@ export const playlistEditErrorSelector = state => state.playlist.playlistEditErr
 export const playlistAlertSelector = state => state.playlist.playlistAlertContent;
 
 export const songIsLoadingSelector = state => state.playlist.songIsLoading;
+
+export const nextSongSelector = state => state.playlist.nextSong;
+
+export const previousSongSelector = state => state.playlist.previousSong;
