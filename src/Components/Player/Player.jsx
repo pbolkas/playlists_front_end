@@ -25,8 +25,6 @@ const Player = () => {
       audio.pause();
     }
 
-    // console.log(`elapsed time -> ${audio.currentTime} out of ${audio.duration}`)
-
     return () => {
       audio.pause();
     };
@@ -39,7 +37,7 @@ const Player = () => {
         {!songIsLoading && <SongInfo />}
       </Grid>
       <Grid item xs={12}>
-        <PlayerControls />
+        <PlayerControls songIsPlaying={songIsPlaying}/>
       </Grid>
     </Grid>
   </>

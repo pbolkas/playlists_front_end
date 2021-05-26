@@ -1,4 +1,4 @@
-import {PLAYLIST_ACTIONS} from '../Actions'
+import { PLAYLIST_ACTIONS, SONG_ACTIONS } from '../Actions'
 
 const initialPlaylistState = {
   songs: [],
@@ -6,108 +6,139 @@ const initialPlaylistState = {
   playlistsLoading: false,
   playlistError: null,
   selectedSong: null,
-  songIsLoading : false,
+  nextSongId: null,
+  previousSongId: null,
+  selectedPlaylist: null,
+  songIsLoading: false,
   playlistAlertContent: null,
 }
 
-const playlistReducer = (state = initialPlaylistState, action) =>{
+const playlistReducer = (state = initialPlaylistState, action) => {
   switch (action.type) {
-    case PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION :{
+    case PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION: {
       return {
         ...state,
         songIsLoading: true,
         selectedSong: null,
       };
     }
-    case PLAYLIST_ACTIONS.SELECT_SONG_RESOLVED_ACTION : {
+    case PLAYLIST_ACTIONS.SELECT_SONG_RESOLVED_ACTION: {
+
+      const song_idx = state.songs.map((song) => { return song.songId; }).indexOf(action.song.id);
+      const next_idx = song_idx === state.songs.length - 1 ? null : state.songs.length === 1 ? null : song_idx + 1;
+      const previous_idx = song_idx === 0 ? null : state.songs.length === 1 ? null : song_idx - 1;
+
+      const nextSong = next_idx === null ? null : state.songs.find((song, idx) => idx === next_idx);
+      const previousSong = previous_idx === null ? null : state.songs.find((song, idx) => idx === previous_idx);
+
       return {
         ...state,
         songIsLoading: false,
         selectedSong: action.song,
+        nextSong: nextSong,
+        previousSong: previousSong,
       }
     }
-    case PLAYLIST_ACTIONS.PLAYLISTS_GET_REQUESTED_ACTION :{
+    case PLAYLIST_ACTIONS.PLAYLISTS_GET_REQUESTED_ACTION: {
       return {
         ...state,
-        playlistsLoading : true
+        playlistsLoading: true
       }
     }
-    case PLAYLIST_ACTIONS.PLAYLISTS_GET_RESOLVED_ACTION :{
+    case PLAYLIST_ACTIONS.PLAYLISTS_GET_RESOLVED_ACTION: {
       return {
         ...state,
-        playlists : action.playlists,
+        playlists: action.playlists,
         playlistsLoading: false,
-        playlistError : null,
+        playlistError: null,
       }
     }
-    case PLAYLIST_ACTIONS.PLAYLISTS_GET_REJECTED_ACTION :{
+    case PLAYLIST_ACTIONS.PLAYLISTS_GET_REJECTED_ACTION: {
       return {
         ...state,
-        playlistsLoading : false,
-        playlistError : action.error,
-        playlists : []
+        playlistsLoading: false,
+        playlistError: action.error,
+        playlists: []
       }
     }
-    case PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED : {
+    case PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED: {
       return {
         ...state,
         playlistAlertContent: null
       }
     }
-    case PLAYLIST_ACTIONS.ADD_PLAYLIST_RESOLVED : {
+    case PLAYLIST_ACTIONS.ADD_PLAYLIST_RESOLVED: {
       return {
         ...state,
-        playlists : [...state.playlists, action.playlist],
+        playlists: [...state.playlists, action.playlist],
         playlistAlertContent: null
       }
     }
-    case PLAYLIST_ACTIONS.ADD_PAYLIST_REJECTED : {
+    case PLAYLIST_ACTIONS.ADD_PAYLIST_REJECTED: {
       return {
         ...state,
-        playlistAlertContent : action.error
+        playlistAlertContent: action.error
       }
     }
-    case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_REJECTED : {
+    case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_REJECTED: {
       return {
         ...state,
-        playlistAlertContent : action.error
+        playlistAlertContent: action.error
       }
     }
-    case PLAYLIST_ACTIONS.CLEAR_ALERT_ERROR : {
+    case PLAYLIST_ACTIONS.CLEAR_ALERT_ERROR: {
       return {
         ...state,
         playlistAlertContent: null,
       }
     }
-    case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_RESOLVED : {
+    case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_RESOLVED: {
       return {
         ...state,
-        playlists : state.playlists.map((playlist)=>{
+        playlists: state.playlists.map((playlist) => {
           playlist.title = playlist.id === action.playlist.songId ? action.playlist.newTitle : playlist.title;
           return playlist;
         }),
       }
     }
-    case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED : {
+    case PLAYLIST_ACTIONS.EDIT_PLAYLIST_NAME_REJECTED: {
       return {
         ...state,
-        playlistAlertContent : action.error
+        playlistAlertContent: action.error
       }
     }
-    case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_RESOLVED :{
+    case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_RESOLVED: {
       return {
         ...state,
-        playlists : state.playlists.filter( (item) => ( item.id !== action.id ) )
+        playlists: state.playlists.filter((item) => (item.id !== action.id))
       }
     }
-    case PLAYLIST_ACTIONS.LOAD_SONGS_REQUESTED_ACTION : {
-      const selectedPlaylist = state.playlists.find((list)=>list.id === action.id);
+    case PLAYLIST_ACTIONS.LOAD_SONGS_REQUESTED_ACTION: {
+      const selectedPlaylist = state.playlists.find((list) => list.id === action.id);
       return {
         ...state,
-        songs : selectedPlaylist.songs,            
+        songs: selectedPlaylist.songs,
+        selectedPlaylist: action.id,
+        selectedSong: null,
+        nextSong: null,
+        previousSong: null,
       }
     }
-    default :{
+    case SONG_ACTIONS.SONG_REMOVE_RESOLVED_ACTION: {
+      return {
+        ...state,
+        songs: state.songs.filter((item) => (item.songId !== action.songId)),
+        selectedSong: null
+      }
+    }
+    case SONG_ACTIONS.SONG_ADD_RESOLVED_ACTION: {
+      let new_song = { songId: action.newSong.songId, songTitle: action.newSong.songTitle }
+      return {
+        ...state,
+        songs: [...state.songs, new_song]
+      }
+    }
+    default: {
       return state;
     }
   }

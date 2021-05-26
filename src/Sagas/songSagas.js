@@ -1,7 +1,7 @@
 import { takeLatest, select, put } from "redux-saga/effects";
-import { PLAYLIST_ACTIONS, selectSongResolveAction, selectSongRejectedAction } from "../Actions";
+import { PLAYLIST_ACTIONS, selectSongResolveAction, selectSongRejectedAction, SONG_ACTIONS, removeSongResolveAction, addSongResolveAction } from "../Actions";
 import { jwtTokenSelector } from "../Selectors/userSelector";
-import { fetchSongService } from "../Services/songService";
+import { addSongService, fetchSongService, removeSongService } from "../Services/songService";
 
 
 function * select_song(action)
@@ -13,7 +13,7 @@ function * select_song(action)
 
     const base64 = result.data.fileContents;
     const songBytes = base64ToArrayBuffer(base64);
-    const blob = new Blob([songBytes], {type:'audio/mpga'});
+    const blob = new Blob([songBytes], {type:'audio/mp3'});
     const url = window.URL.createObjectURL(blob)
 
     const song = {songTitle : action.title, link: url, id: action.id };
@@ -23,6 +23,37 @@ function * select_song(action)
   catch(e)
   {
     yield put(selectSongRejectedAction("error while selecting song"));
+  }
+}
+
+function * uploadSong(action)
+{
+  const jwtToken = yield select(jwtTokenSelector);
+  try 
+  {
+    
+    const result = yield addSongService(action.title, action.playlistId, action.bytes, jwtToken);
+    let newSong = result.data;
+    yield put(addSongResolveAction(newSong))
+    
+  }
+  catch (e)
+  {
+
+  }
+}
+
+function * removeSong(action) {
+  const jwtToken = yield select(jwtTokenSelector);
+  try 
+  {
+    const result = yield removeSongService( action.songId, action.playlistId, jwtToken);
+    yield put(removeSongResolveAction(action.songId));
+
+  }
+  catch (e)
+  {
+
   }
 }
 
@@ -42,5 +73,8 @@ function base64ToArrayBuffer(base64) {
 export function* songSagas()
 {
   yield takeLatest(PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION, select_song);
+  yield takeLatest(SONG_ACTIONS.SONG_ADD_REQUESTED_ACTION, uploadSong);
+  yield takeLatest(SONG_ACTIONS.SONG_REMOVE_REQUESTED_ACTION, select_song);
+  yield takeLatest(SONG_ACTIONS.SELECT_NEXT_REQUESTED_ACTION, select_song);
   
 }
