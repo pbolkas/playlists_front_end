@@ -1,11 +1,9 @@
 import axios from 'axios';
-
-const HOST = "https://localhost:5001/api";
-
+import {HOST} from "./host"
 
 export const getPlaylists = (token) =>{
   return axios.get(
-    `${HOST}/playlists`,
+    `${HOST}/api/playlists`,
     { 
       "headers" :
       {
@@ -17,7 +15,7 @@ export const getPlaylists = (token) =>{
 
 export const addNewPlaylistService = (title, token) =>{
   return axios.post(
-    `${HOST}/playlists`,
+    `${HOST}/api/playlists`,
     {
       "title" : title
     },
@@ -32,7 +30,7 @@ export const addNewPlaylistService = (title, token) =>{
 
 export const editPlaylistTitleService = (newTitle, id, token) => {
   return axios.put(
-    `${HOST}/playlists`,
+    `${HOST}/api/playlists`,
     {
       id,
       newTitle
@@ -48,7 +46,7 @@ export const editPlaylistTitleService = (newTitle, id, token) => {
 
 export const removePlaylistService = (id, token) => {
   return axios.delete(
-    `${HOST}/playlists/${id}`,
+    `${HOST}/api/playlists/${id}`,
     {
       "headers":
       {
