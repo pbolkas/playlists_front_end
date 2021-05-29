@@ -1,10 +1,9 @@
 import axios from 'axios';
-
-const HOST = "https://localhost:5001/api";
+import {HOST} from "./host"
 
 export const fetchSongService = (id, token) => {
   return axios.get(
-    `${HOST}/Song/${id}`,
+    `${HOST}/api/Song/${id}`,
     {
       "headers":
       {
@@ -17,7 +16,7 @@ export const fetchSongService = (id, token) => {
 export const removeSongService = (songId, playlistId, token) => {
 
   return axios.delete(
-    `${HOST}/Song`,
+    `${HOST}/api/Song`,
     {
       data: 
       {
@@ -40,7 +39,7 @@ export const addSongService = (title, playlistId, bytes, token) => {
   formData.append("SongTitle", title);
 
   return axios.post(
-    `${HOST}/Song`,
+    `${HOST}/api/Song`,
     formData,
     {
       headers:
