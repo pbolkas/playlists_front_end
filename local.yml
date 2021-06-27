@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  web:
+    image: pbolkas/soundesque:0.0.1
+    restart: always
