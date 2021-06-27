@@ -43,7 +43,13 @@
     "type": "git",
     "url": "git+https://github.com/pbolkas/playlists_front_end.git"
   },
-  "keywords": ["playlists", "radio", "music", "streaming", "audio"],
+  "keywords": [
+    "playlists",
+    "radio",
+    "music",
+    "streaming",
+    "audio"
+  ],
   "author": "Pavlos Bolkas",
   "license": "ISC",
   "bugs": {
