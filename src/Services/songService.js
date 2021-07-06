@@ -25,7 +25,7 @@ export const removeSongService = (songId, playlistId, token) => {
       },
       headers:
       {
-        Authorization : `Bearer ${token}`
+        "Authorization" : `Bearer ${token}`
       }
     
     });

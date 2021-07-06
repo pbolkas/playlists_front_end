@@ -2,7 +2,8 @@ export const PLAYER_ACTIONS = {
   PLAY: 'PLAY',
   PAUSE: 'PAUSE',
   DURATION : 'DURATION',
-  END: 'END'
+  END: 'END',
+  CLEAR_PLAYER : 'CLEAR_PLAYER'
 }
 
 export const playAction= ()=>{
@@ -27,5 +28,11 @@ export const setDurationAction = (seconds)=>{
   return {
     type: PLAYER_ACTIONS.DURATION,
     duration : seconds
+  }
+}
+
+export const clearPlayerAction = () => {
+  return {
+    type: PLAYER_ACTIONS.CLEAR_PLAYER
   }
 }

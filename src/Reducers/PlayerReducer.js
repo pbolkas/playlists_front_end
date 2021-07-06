@@ -34,6 +34,9 @@ const playerReducer = (state = initialPlayerState, action) =>{
         ended: true,
       }
     }
+    case PLAYER_ACTIONS.CLEAR_PLAYER:{
+      return initialPlayerState;
+    }
     default:{
       return state;
     }

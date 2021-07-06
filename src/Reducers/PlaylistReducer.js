@@ -138,6 +138,9 @@ const playlistReducer = (state = initialPlaylistState, action) => {
         songs: [...state.songs, new_song]
       }
     }
+    case PLAYLIST_ACTIONS.CLEAR_STATE_ACTION:{
+      return initialPlaylistState;
+    }
     default: {
       return state;
     }

@@ -24,7 +24,7 @@ export const PLAYLIST_ACTIONS = {
   LOAD_SONGS_RESOLVED_ACTION : 'LOAD_SONGS_RESOLVED_ACTION',
   LOAD_SONGS_REJECTED_ACTION : 'LOAD_SONGS_REJECTED_ACTION',
   CLEAR_ALERT_ERROR : 'CLEAR_ALERT_ERROR',
-
+  CLEAR_STATE_ACTION: 'CLEAR_STATE_ACTION'
 }
 
 export const getAllPlaylistsRequestAction = () => {
@@ -139,5 +139,11 @@ export const setSelectedSong = (id, title) => {
     type: PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION,
     id,
     title
+  }
+}
+
+export const clearPlaylistAction = () =>{
+  return {
+    type: PLAYLIST_ACTIONS.CLEAR_STATE_ACTION
   }
 }
