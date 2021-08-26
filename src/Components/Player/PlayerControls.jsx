@@ -18,7 +18,7 @@ const PlayerControls = ({songIsPlaying}) => {
     <Grid item xs={4}>
       <Next />
     </Grid>
-  </Grid>;
+  </Grid>
 }
 
 export default PlayerControls;

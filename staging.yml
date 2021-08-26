@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  web:
+    image: 814311800761.dkr.ecr.us-east-2.amazonaws.com/playlists/soundesque:latest
+    restart: always
+    ports:
+      - 8000:80

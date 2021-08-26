@@ -2,5 +2,7 @@ version: '3'
 
 services:
   web:
-    image: pbolkas/soundesque:0.0.1
+    image: pbolkas/soundesque:0.0.7
     restart: always
+    ports:
+      - 80:80

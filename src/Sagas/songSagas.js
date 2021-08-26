@@ -74,7 +74,7 @@ export function* songSagas()
 {
   yield takeLatest(PLAYLIST_ACTIONS.SELECT_SONG_REQUESTED_ACTION, select_song);
   yield takeLatest(SONG_ACTIONS.SONG_ADD_REQUESTED_ACTION, uploadSong);
-  yield takeLatest(SONG_ACTIONS.SONG_REMOVE_REQUESTED_ACTION, select_song);
+  yield takeLatest(SONG_ACTIONS.SONG_REMOVE_REQUESTED_ACTION, removeSong);
   yield takeLatest(SONG_ACTIONS.SELECT_NEXT_REQUESTED_ACTION, select_song);
   
 }
