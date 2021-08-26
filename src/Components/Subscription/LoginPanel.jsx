@@ -28,8 +28,6 @@ const LoginPanel = () => {
   const classes = useStyles();
 
   const submitLogin = (evt) => {
-    console.log(process.env.REACT_APP_API_HOST_PRODUCTION)
-    console.log(process.env.REACT_APP_API_HOST_DEV)
     evt.preventDefault();
 
     dispatch(UserLoginRequestAction(email,password));

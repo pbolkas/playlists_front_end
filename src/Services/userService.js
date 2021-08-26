@@ -2,7 +2,6 @@ import axios from 'axios';
 import {HOST} from "./host"
 
 export const userLogin = (email, password) =>{
-  console.log(HOST);
   return axios.post(
     `${HOST}/api/users/login`,
     {
