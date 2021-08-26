@@ -28,6 +28,7 @@ const LoginPanel = () => {
   const classes = useStyles();
 
   const submitLogin = (evt) => {
+    console.log(process.env.NODE_ENV);
     evt.preventDefault();
 
     dispatch(UserLoginRequestAction(email,password));
