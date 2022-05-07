@@ -47,6 +47,27 @@ export const getAllPlaylistsResolveAction = (playlists) => {
   }
 }
 
+export const getPlaylistRequestAction = (id) => {
+  return {
+    type: PLAYLIST_ACTIONS.ONE_PLAYLIST_GET_REQUESTED_ACTION,
+    id
+  }
+}
+
+export const getPlaylistResolveAction = (playlist) => {
+  return {
+    type: PLAYLIST_ACTIONS.ONE_PLAYLIST_GET_REQUESTED_ACTION,
+    playlist
+  }
+}
+
+export const getPlaylistRejectAction = (error) => {
+  return {
+    type: PLAYLIST_ACTIONS.ONE_PLAYLIST_GET_REQUESTED_ACTION,
+    error
+  }
+}
+
 export const addPlaylistRequestAction = (title) => {
   return {
     type: PLAYLIST_ACTIONS.ADD_PLAYLIST_REUQESTED,
@@ -72,10 +93,6 @@ export const addPlaylistRejectAction = (error) => {
     type: PLAYLIST_ACTIONS.ADD_PAYLIST_REJECTED,
     error
   }
-}
-
-export const getPlaylistRequestAction = (playlistId, token) => {
-
 }
 
 export const editPlaylistNameRequestAction = (newTitle, id) => {

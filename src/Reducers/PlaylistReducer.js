@@ -110,6 +110,8 @@ const playlistReducer = (state = initialPlaylistState, action) => {
     case PLAYLIST_ACTIONS.REMOVE_PLAYLIST_RESOLVED: {
       return {
         ...state,
+        selectedPlaylist: action.id === state.selectedPlaylist ? null : state.selectedPlaylist,
+        songs: initialPlaylistState.songs,
         playlists: state.playlists.filter((item) => (item.id !== action.id))
       }
     }
@@ -125,6 +127,7 @@ const playlistReducer = (state = initialPlaylistState, action) => {
       }
     }
     case SONG_ACTIONS.SONG_REMOVE_RESOLVED_ACTION: {
+      // TODO: remove also from "playlist.songs" array
       return {
         ...state,
         songs: state.songs.filter((item) => (item.songId !== action.songId)),
@@ -132,10 +135,19 @@ const playlistReducer = (state = initialPlaylistState, action) => {
       }
     }
     case SONG_ACTIONS.SONG_ADD_RESOLVED_ACTION: {
-      let new_song = { songId: action.newSong.songId, songTitle: action.newSong.songTitle }
+      const new_song = { songId: action.newSong.songId, songTitle: action.newSong.songTitle }
+      // TODO fix duplicate song bug
+      const new_playlists = state.playlists.map( (p) => {
+        if(p.id === state.selectedPlaylist)
+        {
+          p.songs.push(new_song);
+        }
+        return p;
+      })
       return {
         ...state,
-        songs: [...state.songs, new_song]
+        songs: [...state.songs, new_song],
+        playlists: new_playlists,
       }
     }
     case PLAYLIST_ACTIONS.CLEAR_STATE_ACTION:{

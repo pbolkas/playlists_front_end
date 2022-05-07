@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, CircularProgress, makeStyles } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux';
-import { playlistsSelector, playlistsLoadingSelector, playlistsErrorSelector } from '../../Selectors/playlistSelector';
+import { playlistsSelector, playlistsLoadingSelector, playlistsErrorSelector, selectedPlaylistSelector } from '../../Selectors/playlistSelector';
 import { getAllPlaylistsRequestAction, loadSongsRequestedAction } from '../../Actions';
 import PlaylistListActions from '../Playlist/PlaylistActions/PlaylistListActions';
 
@@ -19,6 +19,7 @@ const PlaylistsList = ()=>{
   const playlists = useSelector(playlistsSelector);
   const playlistsLoading = useSelector(playlistsLoadingSelector);
   const playlistsError = useSelector(playlistsErrorSelector);
+  const selectedPlaylist = useSelector(selectedPlaylistSelector);
   
 
   useEffect(() => {
@@ -53,11 +54,12 @@ const PlaylistsList = ()=>{
   return <>
   <List className = {classes.root}>
   {playlists.map((p,idx) =>{
+    const selected = p.id === selectedPlaylist;
     return (
-      <ListItem key = {idx} button onClick={()=>loadPlaylistSongs(p.id)}>
+      <ListItem selected={selected} key = {idx} button onClick={()=>loadPlaylistSongs(p.id)}>
         <ListItemText primary={`${p.title}`} />
         <ListItemSecondaryAction>
-          <PlaylistListActions playlist = {p}/>          
+          <PlaylistListActions playlist = {p} playing = {selected} />          
         </ListItemSecondaryAction>
       </ListItem>
     );

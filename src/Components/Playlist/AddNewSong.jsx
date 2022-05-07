@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Button, makeStyles } from '@material-ui/core'
 import AddSongDialog from './AddSong/AddSongDialog';
+import { useSelector } from 'react-redux';
+import { selectedPlaylistSelector } from '../../Selectors/playlistSelector';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,6 +12,8 @@ const useStyles = makeStyles(theme => ({
 }))
 const AddNewSong = () => {
   const classes = useStyles();
+  
+  const selectedPlaylist = useSelector(selectedPlaylistSelector);
 
   const [openForm, setOpenForm] = useState(false);
 
@@ -26,7 +31,7 @@ const AddNewSong = () => {
   }
 
   return <>
-    <Button className={classes.root} fullWidth variant="contained" color="secondary" onClick={handleAddNewSong}>
+    <Button className={classes.root} disabled={selectedPlaylist == null} fullWidth variant="contained" color="secondary" onClick={handleAddNewSong}>
       Add new song
     </Button>
     <AddSongDialog open={openForm} dialogTitle="Add new song" fnAccept={setCloseForm} fnReject={handleRejectAddSong} />
