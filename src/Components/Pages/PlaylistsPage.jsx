@@ -3,6 +3,7 @@ import { makeStyles, Typography, Grid} from '@material-ui/core';
 import CurrentPlaylist from '../Playlist/CurrentPlaylist';
 import AvailablePlaylists from '../Playlist/AvailablePlaylists';
 import Alert from '../Common/Alert';
+import LiveShareButton from '../Common/LiveShareButton';
 
 const useStyles = makeStyles(theme=>({
   page:{
@@ -29,6 +30,7 @@ const PlaylistsPage = ()=>{
       </Grid>
     </Grid>
     <Alert />
+    <LiveShareButton />
   </div>
 }
 

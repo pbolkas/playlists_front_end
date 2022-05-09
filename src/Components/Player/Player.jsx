@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { LinearProgress, Grid } from '@material-ui/core'
 import SongInfo from './SongInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import { playerIsPlayingSelector } from '../../Selectors/playerSelector';
-import { setDurationAction } from '../../Actions';
+import { setDurationAction, pauseAction } from '../../Actions';
 import { selectedSongSelector, songIsLoadingSelector } from '../../Selectors/playlistSelector';
 import PlayerControls from './PlayerControls';
 
@@ -12,10 +12,35 @@ const Player = () => {
   const dispatch = useDispatch();
   const selectedSong = useSelector(selectedSongSelector);
   const songIsLoading = useSelector(songIsLoadingSelector);
-
-  const audio = new Audio(selectedSong === null ? "" : selectedSong.link);
-  // dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
+  // TODO: use this to implement progress bar dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
   const songIsPlaying = useSelector(playerIsPlayingSelector);
+  const [enableAutoplay, setEnableAutoplay] = useState(false);
+
+  const isAutoplayEnabled = () =>{
+    return enableAutoplay;
+  }
+
+  let audio = new Audio(selectedSong === null ? "" : selectedSong.link)
+  audio.addEventListener('ended', (evt) => {
+    // TODO handle 'ended' event
+    handleTrackEndedEvent();
+  });
+
+  const handleTrackEndedEvent = () => {
+    trackEnded();
+
+    if(isAutoplayEnabled())
+      nextTrack();
+  }
+
+  const trackEnded = () => {
+    dispatch(pauseAction());
+  }
+
+  const nextTrack = () => {
+    // TODO
+  }
+  
 
   useEffect(() => {
 

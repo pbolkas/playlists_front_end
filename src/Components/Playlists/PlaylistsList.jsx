@@ -6,7 +6,7 @@ import { getAllPlaylistsRequestAction, loadSongsRequestedAction } from '../../Ac
 import PlaylistListActions from '../Playlist/PlaylistActions/PlaylistListActions';
 
 const useStyles = makeStyles(theme => ({
-  root:{
+  broadcast:{
     overflowY: "scroll",
     maxHeight: 300
   },
