@@ -1,0 +1,1 @@
+export const liveShareEnableSelector = state => state.liveShare.liveShareEnabled;

@@ -10,7 +10,7 @@ export const LIVE_SHARE_ACTIONS = {
   PEER_ID_REJECT : 'PEER_ID_REJECT',
 }
 
-export const liveShareEnableRequestAction = () =>{
+export const liveShareEnableRequestAction = () => {
   return {
     type: LIVE_SHARE_ACTIONS.LIVE_SHARE_ENABLE_REQUEST
   }
@@ -29,7 +29,7 @@ export const liveShareEnableResolveAction = () => {
   }
 }
 
-export const liveShareDisableRequestAction = () =>{
+export const liveShareDisableRequestAction = () => {
   return {
     type: LIVE_SHARE_ACTIONS.LIVE_SHARE_DISABLE_REQUEST
   }
