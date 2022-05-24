@@ -6,9 +6,11 @@ import { playerIsPlayingSelector } from '../../Selectors/playerSelector';
 import { setDurationAction, pauseAction } from '../../Actions';
 import { selectedSongSelector, songIsLoadingSelector } from '../../Selectors/playlistSelector';
 import PlayerControls from './PlayerControls';
+import { addSongEndedListener, pauseAudio, playAudio } from '../Audio/AudioPlayer';
 
 
 const Player = () => {
+
   const dispatch = useDispatch();
   const selectedSong = useSelector(selectedSongSelector);
   const songIsLoading = useSelector(songIsLoadingSelector);
@@ -20,11 +22,13 @@ const Player = () => {
     return enableAutoplay;
   }
 
-  let audio = new Audio(selectedSong === null ? "" : selectedSong.link)
-  audio.addEventListener('ended', (evt) => {
-    // TODO handle 'ended' event
-    handleTrackEndedEvent();
-  });
+  // let audio = new Audio(selectedSong === null ? "" : selectedSong.link)
+  // audio.addEventListener('ended', (evt) => {
+  //   // TODO handle 'ended' event
+  //   handleTrackEndedEvent();
+  // });
+
+  addSongEndedListener((evt) => handleTrackEndedEvent());
 
   const handleTrackEndedEvent = () => {
     trackEnded();
@@ -45,15 +49,18 @@ const Player = () => {
   useEffect(() => {
 
     if (songIsPlaying) {
-      audio.play();
+      // audio.play();
+      playAudio();
     } else {
-      audio.pause();
+      // audio.pause();
+      pauseAudio();
     }
 
     return () => {
-      audio.pause();
+      // audio.pause();
+      pauseAudio();
     };
-  }, [songIsPlaying, audio, dispatch])
+  }, [songIsPlaying, dispatch])
 
   return <>
     <Grid container>

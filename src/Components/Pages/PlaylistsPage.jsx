@@ -4,6 +4,7 @@ import CurrentPlaylist from '../Playlist/CurrentPlaylist';
 import AvailablePlaylists from '../Playlist/AvailablePlaylists';
 import Alert from '../Common/Alert';
 import LiveShareButton from '../Common/LiveShareButton';
+import ListenBroadCast from '../Broadcast/ListenBroadcast';
 
 const useStyles = makeStyles(theme=>({
   page:{
@@ -22,9 +23,18 @@ const PlaylistsPage = ()=>{
       Playlist App
     </Typography>
     <Grid container spacing={2}>
+
       <Grid item xs={12} md={6}>
-        <CurrentPlaylist/>
+        <Grid container spacing = {2}>
+          <Grid item xs={12}>
+            <CurrentPlaylist/>
+          </Grid>
+          <Grid item xs={12}>
+            <ListenBroadCast/>
+          </Grid>
+        </Grid>
       </Grid>
+
       <Grid item xs={12} md={6}>
         <AvailablePlaylists/>
       </Grid>

@@ -48,7 +48,7 @@ const AddSongDialog = ({open, dialogTitle, fnAccept = () => {}, fnReject = () =>
           value={title}
           onChange={(evt) => setTitle(evt.target.value)}
         />
-        <Button varint="contained">
+        <Button variant="contained">
           <input type="file" id="songFile" multiple onChange={(evt) => loadSong(evt) }
           />
         </Button>

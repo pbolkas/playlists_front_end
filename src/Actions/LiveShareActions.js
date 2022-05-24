@@ -8,6 +8,10 @@ export const LIVE_SHARE_ACTIONS = {
   PEER_ID_REQUEST : 'PEER_ID_REQUEST',
   PEER_ID_RESOLVE : 'PEER_ID_RESOLVE',
   PEER_ID_REJECT : 'PEER_ID_REJECT',
+  SET_PEER_ID : 'SET_PEER_ID',
+  LISTEN_BROADCAST_REQUEST : 'LISTEN_BROADCAST_REQUEST',
+  LISTEN_BROADCAST_RESOLVE : 'LISTEN_BROADCAST_RESOLVE',
+  LISTEN_BROADCAST_REJECT : 'LISTEN_BROADCAST_REJECT'
 }
 
 export const liveShareEnableRequestAction = () => {
@@ -57,13 +61,41 @@ export const peerIdRequestAction = () => {
 export const peerIdRejectAction = (error) => {
   return {
     type: LIVE_SHARE_ACTIONS.PEER_ID_REJECT,
-    error
+    error,
   }
 }
 
 export const peerIdResolveAction = (peerId) => {
   return {
     type: LIVE_SHARE_ACTIONS.PEER_ID_RESOLVE,
-    peerId 
+    peerId,
+  }
+}
+
+export const setPeerIdAction = (peerId) => {
+  return {
+    type: LIVE_SHARE_ACTIONS.SET_PEER_ID,
+    peerId,
+  }
+}
+
+export const listenBroadcastRequest = (remotePeerId) => {
+  return {
+    type: LIVE_SHARE_ACTIONS.LISTEN_BROADCAST_REQUEST,
+    peerId : remotePeerId
+  }
+}
+
+export const listenBroadcastReject = (error) => {
+  return {
+    type: LIVE_SHARE_ACTIONS.LISTEN_BROADCAST_REQUEST,
+    error
+  }
+}
+
+export const listenBroadcastResolve = (stream) => {
+  return {
+    type: LIVE_SHARE_ACTIONS.LISTEN_BROADCAST_REQUEST,
+    stream
   }
 }
