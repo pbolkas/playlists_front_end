@@ -4,7 +4,7 @@ import SongInfo from './SongInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import { playerIsPlayingSelector } from '../../Selectors/playerSelector';
 import { setDurationAction, pauseAction } from '../../Actions';
-import { selectedSongSelector, songIsLoadingSelector } from '../../Selectors/playlistSelector';
+import { songIsLoadingSelector } from '../../Selectors/playlistSelector';
 import PlayerControls from './PlayerControls';
 import { addSongEndedListener, pauseAudio, playAudio } from '../Audio/AudioPlayer';
 
@@ -12,7 +12,6 @@ import { addSongEndedListener, pauseAudio, playAudio } from '../Audio/AudioPlaye
 const Player = () => {
 
   const dispatch = useDispatch();
-  const selectedSong = useSelector(selectedSongSelector);
   const songIsLoading = useSelector(songIsLoadingSelector);
   // TODO: use this to implement progress bar dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
   const songIsPlaying = useSelector(playerIsPlayingSelector);
@@ -21,12 +20,6 @@ const Player = () => {
   const isAutoplayEnabled = () =>{
     return enableAutoplay;
   }
-
-  // let audio = new Audio(selectedSong === null ? "" : selectedSong.link)
-  // audio.addEventListener('ended', (evt) => {
-  //   // TODO handle 'ended' event
-  //   handleTrackEndedEvent();
-  // });
 
   addSongEndedListener((evt) => handleTrackEndedEvent());
 
@@ -45,19 +38,15 @@ const Player = () => {
     // TODO
   }
   
-
   useEffect(() => {
 
     if (songIsPlaying) {
-      // audio.play();
       playAudio();
     } else {
-      // audio.pause();
       pauseAudio();
     }
 
     return () => {
-      // audio.pause();
       pauseAudio();
     };
   }, [songIsPlaying, dispatch])

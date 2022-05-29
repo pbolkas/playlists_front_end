@@ -37,6 +37,16 @@ const convertFileToUrl = (fileContents) => {
   return url;
 }
 
+export const increaseVolume = (value) => {
+  if(value <= 2)
+    audio.volume = value;
+}
+
+export const decreaseVolume = (value) => {
+  if(value >= 0)
+    audio.volume = value;
+}
+
 const setSelectedSongLink = (selectedSongLink) => {
   selectedSong = selectedSongLink;
 }
@@ -47,6 +57,18 @@ export const playAudio = () => {
 
 export const pauseAudio = () => {
   audio.pause();
+}
+
+export const getAudioStream = () => {
+  console.log(`capturing stream`);
+  let stream = audio.srcObject;
+  let ms = audio.captureStream(stream);
+  return ms;
+}
+
+export const setAudioStream = (stream) => {
+  audio.srcObject = stream;
+  playAudio();
 }
 
 export const addSongEndedListener = (listenerfn) => {

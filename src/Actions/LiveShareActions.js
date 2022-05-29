@@ -27,9 +27,10 @@ export const liveShareEnableRejectAction = (error) => {
   }
 }
 
-export const liveShareEnableResolveAction = () => {
+export const liveShareEnableResolveAction = (stream) => {
   return {
-    type: LIVE_SHARE_ACTIONS.LIVE_SHARE_ENABLE_RESOLVE
+    type: LIVE_SHARE_ACTIONS.LIVE_SHARE_ENABLE_RESOLVE,
+    stream
   }
 }
 

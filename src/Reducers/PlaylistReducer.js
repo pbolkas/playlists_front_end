@@ -127,7 +127,7 @@ const playlistReducer = (state = initialPlaylistState, action) => {
       }
     }
     case SONG_ACTIONS.SONG_REMOVE_RESOLVED_ACTION: {
-      // TODO: remove also from "playlist.songs" array
+      
       return {
         ...state,
         songs: state.songs.filter((item) => (item.songId !== action.songId)),
@@ -136,7 +136,7 @@ const playlistReducer = (state = initialPlaylistState, action) => {
     }
     case SONG_ACTIONS.SONG_ADD_RESOLVED_ACTION: {
       const new_song = { songId: action.newSong.songId, songTitle: action.newSong.songTitle }
-      // TODO fix duplicate song bug
+
       const new_playlists = state.playlists.map( (p) => {
         if(p.id === state.selectedPlaylist)
         {

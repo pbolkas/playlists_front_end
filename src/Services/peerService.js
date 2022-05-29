@@ -4,11 +4,15 @@ import * as uuid from "uuid";
 
 const id = uuid.v4().slice(0,4);
 
+export const PEER_STATUS = {
+  CONNECTION_IS_ALIVE: 'CONNECTION_IS_ALIVE',
+  CONNECTION_FAILED: 'CONNECTION_FAILED',
+  BROADCASTING: 'BROADCASTING',
+}
+
 export const getPeerId = () => {
   return id;
 }
-
-const callerAudio = new MediaStream();
 
 let peerClient = new Peer(id, {
   host: PEER_HOST,
@@ -17,15 +21,28 @@ let peerClient = new Peer(id, {
   path: "/myapp"
 });
 
+let connectionIsAlive = false;
+
 peerClient.on('open', id => {
   // TODO: on peer client open, just save the id to the state
   console.log(`opened | id => ${id}`);
+  connectionIsAlive = true;
 });
 
 export const initAnswer = (stream) => {
+  if(!connectionIsAlive) {
+    connectionIsAlive = false;
+    return PEER_STATUS.CONNECTION_FAILED;
+  }
   peerClient.on('call', (call) => {
     call.answer(stream);
   });
+  return PEER_STATUS.BROADCASTING;
+}
+
+export const peerDisconnect = () => {
+  peerClient.disconnect();
+  connectionIsAlive = false;
 }
 
 export const getPeerClient = () => {
@@ -34,11 +51,14 @@ export const getPeerClient = () => {
 
 export const joinLiveShareId = (remotePeerId, placeStreamToLocalAudio) => {
 
-  let fakeStream = callerAudio;
-  // TODO: fakeStream is just the stream that the listener needs to send to the broadcaster
+  let fakeContext = new AudioContext();
+  let fakeStream = fakeContext.createMediaStreamDestination().stream;
+  
+  console.log('calling... drinnnn')
   var call = peerClient.call( remotePeerId, fakeStream );
 
   call.on('stream', (stream) => {
+    console.log('got stream back')
     placeStreamToLocalAudio(stream);
   });
 }
