@@ -60,7 +60,6 @@ export const pauseAudio = () => {
 }
 
 export const getAudioStream = () => {
-  console.log(`capturing stream`);
   let stream = audio.srcObject;
   let ms = audio.captureStream(stream);
   return ms;

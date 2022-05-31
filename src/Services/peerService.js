@@ -24,8 +24,6 @@ let peerClient = new Peer(id, {
 let connectionIsAlive = false;
 
 peerClient.on('open', id => {
-  // TODO: on peer client open, just save the id to the state
-  console.log(`opened | id => ${id}`);
   connectionIsAlive = true;
 });
 
@@ -54,11 +52,9 @@ export const joinLiveShareId = (remotePeerId, placeStreamToLocalAudio) => {
   let fakeContext = new AudioContext();
   let fakeStream = fakeContext.createMediaStreamDestination().stream;
   
-  console.log('calling... drinnnn')
   var call = peerClient.call( remotePeerId, fakeStream );
 
   call.on('stream', (stream) => {
-    console.log('got stream back')
     placeStreamToLocalAudio(stream);
   });
 }

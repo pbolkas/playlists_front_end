@@ -10,7 +10,7 @@ function* enableLiveShare(action) {
   if(stream != null) {
     yield put(liveShareEnableResolveAction(stream));
   } else {
-    yield put(liveShareEnableRejectAction("error"));
+    yield put(liveShareEnableRejectAction("error on live sharing enable"));
   }
 }
 

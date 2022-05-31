@@ -3,7 +3,7 @@ import { initAnswer, peerDisconnect, PEER_STATUS } from "../Services/peerService
 
 
 const initialLiveShareState = {
-  myId: null,
+  peerId: null,
   liveShareEnabled: false
 }
 
@@ -77,6 +77,12 @@ const liveShareReducer = ( state = initialLiveShareState, action) => {
     case (LIVE_SHARE_ACTIONS.LISTEN_BROADCAST_REJECT) : {
       return {
         ...state,
+      }
+    }
+    case (LIVE_SHARE_ACTIONS.SET_PEER_ID) : {
+      return {
+        ...state,
+        peerId: action.peerId
       }
     }
     default:{
