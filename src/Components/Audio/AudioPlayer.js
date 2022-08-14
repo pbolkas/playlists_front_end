@@ -2,6 +2,7 @@ let selectedSong;
 
 let audio = new Audio("");
 
+audio.autoplay = true;
 
 function base64ToArrayBuffer(base64) {
 
@@ -20,8 +21,36 @@ export const chooseSong = (fileContents, title, id) => {
   const url = convertFileToUrl(fileContents);
   const song = getSong(title, url, id);
   setSelectedSongLink(song.link);
-  setNewSongToAudio();
+  loadTheSong();
   return song;
+}
+
+const isSongPlaying = () => {
+  let isPlaying = false;
+  if( isSelectedSongValid())
+  {
+    isPlaying = audio.currentTime !== 0;
+  }
+  return isPlaying;
+}
+
+const loadTheSong = () => {
+  
+  const songWasPlaying = isSongPlaying();
+  
+  if(songWasPlaying)
+  {
+    pauseAudio();
+    audio.currentTime = 0;
+  }
+
+  setNewSongToAudio();
+
+  if(songWasPlaying)
+  {
+    playAudio();
+  }
+
 }
 
 const getSong = (title, url, id) => {
@@ -63,10 +92,14 @@ export const getAudioStream = () => {
   let stream = audio.srcObject;
   let ms = audio.captureStream(stream);
   return ms;
+  // return mediaStream;
 }
 
 export const setAudioStream = (stream) => {
+  // audio.srcObject = stream;
+  audio = new Audio("");
   audio.srcObject = stream;
+  audio.autoplay = true;
   playAudio();
 }
 

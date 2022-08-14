@@ -3,8 +3,8 @@ import { LinearProgress, Grid } from '@material-ui/core'
 import SongInfo from './SongInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import { playerIsPlayingSelector } from '../../Selectors/playerSelector';
-import { setDurationAction, pauseAction } from '../../Actions';
-import { songIsLoadingSelector } from '../../Selectors/playlistSelector';
+import { setDurationAction, pauseAction, setSelectedSong } from '../../Actions';
+import { nextSongSelector, songIsLoadingSelector } from '../../Selectors/playlistSelector';
 import PlayerControls from './PlayerControls';
 import { addSongEndedListener, pauseAudio, playAudio } from '../Audio/AudioPlayer';
 
@@ -15,7 +15,8 @@ const Player = () => {
   const songIsLoading = useSelector(songIsLoadingSelector);
   // TODO: use this to implement progress bar dispatch(setDurationAction(selectedSong === null ? 0 :audio.duration));
   const songIsPlaying = useSelector(playerIsPlayingSelector);
-  const [enableAutoplay, setEnableAutoplay] = useState(false);
+  const [enableAutoplay, setEnableAutoplay] = useState(true);
+  const next = useSelector(nextSongSelector);
 
   const isAutoplayEnabled = () =>{
     return enableAutoplay;
@@ -35,7 +36,8 @@ const Player = () => {
   }
 
   const nextTrack = () => {
-    // TODO
+    if(next !== null)
+      dispatch(setSelectedSong(next.songId, next.songTitle))
   }
   
   useEffect(() => {
